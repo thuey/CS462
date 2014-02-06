@@ -1,7 +1,7 @@
 
 ruleset HelloWorldApp {
   meta {
-    name "Hello Bob"
+    name "Hello World"
     description <<
       Hello World
     >>
@@ -18,7 +18,7 @@ ruleset HelloWorldApp {
     select when web cloudAppSelected
     pre {
       my_html = <<
-        <h5>Hello, world!</h5>
+        <h5>Hello, bob!</h5>
       >>;
     }
     {

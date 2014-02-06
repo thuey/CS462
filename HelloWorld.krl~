@@ -1,7 +1,7 @@
 
 ruleset HelloWorldApp {
   meta {
-    name "Hello World"
+    name "Hello Bob"
     description <<
       Hello World
     >>
