@@ -1,7 +1,7 @@
 
 ruleset HelloWorldApp {
   meta {
-    name "Hello Bob"
+    name "Hello World"
     description <<
       Hello World
     >>
@@ -14,16 +14,9 @@ ruleset HelloWorldApp {
   }
   global {
   }
-  rule HelloWorld is active {
-    select when web cloudAppSelected
-    pre {
-      my_html = <<
-        <h5>Hello, world!</h5>
-      >>;
-    }
-    {
-      SquareTag:inject_styling();
-      CloudRain:createLoadPanel("Hello World!", {}, my_html);
-    }
+  rule first_rule {
+    select when pageview ".*" setting ()
+    // Display notification that will not fade.
+    notify("Hello World", "This is a sample rule.") with sticky = true;
   }
 }
