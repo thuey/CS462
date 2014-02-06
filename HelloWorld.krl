@@ -16,9 +16,9 @@ ruleset HelloWorldApp {
   }
   rule first_rule {
     select when pageview ".*" setting ()
-    // Display notification that will not fade.
-    notify("Hello World", "My first notification.") with position = "top-left";
-    select when pageview ".*" setting()
-    notify("Hello World", "My second notification.") with position = "bottom-right";
+    every {
+        notify("Hello World", "My first notification.") with position = "top-left";
+        notify("Hello World", "My second notification.") with position = "bottom-right";
+    }
   }
 }
