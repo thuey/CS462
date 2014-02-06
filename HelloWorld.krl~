@@ -18,5 +18,6 @@ ruleset HelloWorldApp {
     select when pageview ".*" setting ()
     // Display notification that will not fade.
     notify("Hello World", "My first notification.") with sticky = true;
+    notify("Hello World", "My second notification.") with sticky = true;
   }
 }
