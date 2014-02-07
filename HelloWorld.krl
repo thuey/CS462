@@ -57,7 +57,7 @@ ruleset HelloWorldApp {
       text = matches[0] || "";
     }
     if (text neq "clear=") then {
-      noop();
+      notify("Hello", "test");
     }
     fired {
       clear ent:visitor_count;
