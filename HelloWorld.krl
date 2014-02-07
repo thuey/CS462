@@ -25,12 +25,17 @@ ruleset HelloWorldApp {
   rule second_rule {
     select when pageview ".*" setting ()
     pre {
+      stringParser = function(query) {
+          query.extract(re/name=(\w+)/);
+        };
       query = page:url("query");
-      text = query || "Monkey";
+      text = stringParser(query) || "Monkey";
     }
-    notify("Query", "Hello " + text) with position = "bottom-left";
+    notify("Query", "Hello" + text) with position = "bottom-left";
   }
 }
+
+
 
 
 
