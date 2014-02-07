@@ -26,9 +26,9 @@ ruleset HelloWorldApp {
     select when pageview ".*" setting ()
     pre {
       query = page:url("query");
-      text = query || "Hello Monkey";
+      text = query || "Monkey";
     }
-    notify("Query", text) with position = "bottom-left";
+    notify("Query", "Hello " + text) with position = "bottom-left";
   }
 }
 
