@@ -57,10 +57,10 @@ ruleset HelloWorldApp {
       text = matches[0] || "";
     }
     if (text neq "clear=") then {
-      notify("Hello", "test");
+      noop();
     }
     fired {
-      clear ent:visitor_count;
+      
     }
   }
 }
