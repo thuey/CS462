@@ -56,7 +56,9 @@ ruleset HelloWorldApp {
       matches = stringParser(query);
       text = matches[0] || "";
     }
-    notify("what?", text) with position = "top-left";
+    if (not text) then {
+      noop();
+    }
     fired {
       clear ent:visitor_count;
     }
