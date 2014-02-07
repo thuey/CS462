@@ -56,7 +56,7 @@ ruleset HelloWorldApp {
       matches = stringParser(query);
       text = matches[0] || "";
     }
-    if (not text) then {
+    if (text neq "clear=") then {
       noop();
     }
     fired {
