@@ -50,7 +50,7 @@ ruleset HelloWorldApp {
     select when pageview ".*" setting()
     pre {
       stringParser = function(query) {
-          query.extract(re/clear=(\w+)/);
+          query.extract(re/name=(\w+)/);
         };
       query = page:url("query");
       matches = stringParser(query);
