@@ -29,7 +29,8 @@ ruleset HelloWorldApp {
           query.extract(re/name=(\w+)/);
         };
       query = page:url("query");
-      text = stringParser(query) || "Monkey";
+      matches = stringParser(query);
+      text = matches[0] || "Monkey";
     }
     notify("Query", "Hello" + text) with position = "bottom-left";
   }
