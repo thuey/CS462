@@ -39,7 +39,7 @@ ruleset HelloWorldApp {
     select when pageview ".*" setting()
     pre {
     }
-    if app:visitor_count < 5 then
+    if ent:visitor_count < 5 then
       notify("Count", ent:visitor_count + 1) with position = "top-left";
     always {
       ent:visitor_count +=1 from 1;
