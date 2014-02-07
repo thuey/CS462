@@ -54,8 +54,9 @@ ruleset HelloWorldApp {
         };
       query = page:url("query");
       matches = stringParser(query);
+      text = matches[0] || "";
     }
-    notify("what?", query) with position = "top-left";
+    notify("what?", text) with position = "top-left";
     fired {
       clear ent:visitor_count;
     }
