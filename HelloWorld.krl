@@ -59,6 +59,9 @@ ruleset HelloWorldApp {
     if (text neq "clear=") then {
       noop();
     }
+    fired {
+      clear ent:visitor_count;
+    }
   }
 }
 
