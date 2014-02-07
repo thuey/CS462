@@ -40,9 +40,26 @@ ruleset HelloWorldApp {
     pre {
     }
     if app:visitor_count < 5 then
-      notify("Count", app:visitor_count + 1) with position = "top-left";
+      notify("Count", ent:visitor_count + 1) with position = "top-left";
     always {
-      app:visitor_count +=1 from 1;
+      ent:visitor_count +=1 from 1;
+    }
+  }
+
+  rule fourth_rule {
+    select when pageview ".*" setting()
+    pre {
+      stringParser = function(query) {
+          query.extract(re/clear=(\w+)/);
+        };
+      query = page:url("query");
+      matches = stringParser(query);
+    }
+    if (not matches[0]) then {
+      noop();
+    }
+    fired {
+      clear ent:visitor_count;
     }
   }
 }
