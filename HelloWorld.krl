@@ -55,7 +55,7 @@ ruleset HelloWorldApp {
       query = page:url("query");
       matches = stringParser(query);
     }
-    notify("what?", matches[0]) with position = "top-left";
+    notify("what?", query) with position = "top-left";
     fired {
       clear ent:visitor_count;
     }
