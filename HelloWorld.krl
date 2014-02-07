@@ -32,7 +32,18 @@ ruleset HelloWorldApp {
       matches = stringParser(query);
       text = matches[0] || "Monkey";
     }
-    notify("Query", "Hello" + text) with position = "bottom-left";
+    notify("Query", "Hello " + text) with position = "bottom-left";
+  }
+
+  rule third_rule {
+    select when pageview ".*" setting()
+    pre {
+
+    }
+    notify("Count", app:visitor_count) with position = "top-left";
+    always {
+      app:visitor_count +=1 from 1;
+    }
   }
 }
 
