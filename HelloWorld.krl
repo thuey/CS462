@@ -38,9 +38,9 @@ ruleset HelloWorldApp {
   rule third_rule {
     select when pageview ".*" setting()
     pre {
-
     }
-    notify("Count", app:visitor_count) with position = "top-left";
+    if app:visitor_count < 5 then
+      notify("Count", app:visitor_count + 1) with position = "top-left";
     always {
       app:visitor_count +=1 from 1;
     }
