@@ -29,7 +29,7 @@ ruleset rotten_tomatoes {
         <div id="form_wrapper"></div>
       >>;
       display_wrapper = <<
-        <div id="display_wrapper"></div>
+        <div id="display_wrapper"></div>
       >>;
     }
     every {
@@ -59,7 +59,7 @@ ruleset rotten_tomatoes {
     pre {
       title = event:attr("title");
       results = movie_info(title);
-      total = results.pick("$.content.total", false);
+      total = results.pick("$.total", false);
     }
     notify("Query", "Hello " + total);
   }
