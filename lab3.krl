@@ -10,7 +10,8 @@ ruleset Lab3App {
   global {
    
   }
-  rule clear {
+  
+  rule clear_name {
     select when pageview ".*" setting()
     pre {
       stringParser = function(query) {
@@ -28,6 +29,7 @@ ruleset Lab3App {
       clear ent:lastname;
     }
   }
+
   rule show_form {
     select when pageview ".*" setting ()
     pre {
