@@ -59,7 +59,7 @@ ruleset rotten_tomatoes {
     pre {
       title = event:attr("title");
       results = movie_info(title);
-      total = results.pick("$..total");
+      total = results.pick("$.content..total");
     }
     /* replace_inner("#display_wrapper",  "#{total}"); */
   }
