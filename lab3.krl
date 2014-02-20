@@ -47,7 +47,8 @@ ruleset Lab3App {
         <p>#{name}</p>
       >>;
     }
-    append("#main", p); 
+    if (firstName && lastName) then
+      append("#main", p); 
   }
 }
 
