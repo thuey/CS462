@@ -64,7 +64,7 @@ ruleset rotten_tomatoes {
       img_src = results.pick("$..thumbnail");
       title = results.pick("$..title");
       year = results.pick("$..year");
-      synposis = results.pick("$..results");
+      synopsis = results.pick("$..synopsis");
       critics_rating = results.pick("$..critics_rating");
       audience_rating = results.pick("$..audience_rating");
       
