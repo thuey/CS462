@@ -62,7 +62,7 @@ ruleset rotten_tomatoes {
       results = movie_info(submittedTitle);
       total = results.pick("$.total");
       img_src = results.pick("$..thumbnail");
-      title = results.pick("$..title");
+      title = results.pick("$..title").replace(re/ /, "bob");
       year = results.pick("$..year");
       synopsis = results.pick("$..synopsis");
       critics_rating = results.pick("$..critics_rating");
