@@ -84,7 +84,7 @@ ruleset rotten_tomatoes {
     every
     {
       notify("bob", submittedTitle);
-      notify("bob2", submittedTitle.replace(re/ /, "%20");
+      notify("bob2", submittedTitle.replace(re/ /, "%20"));
       replace_inner("#display_wrapper", "#{printout}");
     }
   }
