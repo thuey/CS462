@@ -58,8 +58,10 @@ ruleset rotten_tomatoes {
     select when web submit "#my_form"
     pre {
       title = event:attr("title");
+      results = movie_info(title);
+      total results.pick("$..total");
     }
-    replace_inner("#name",  "#{name}"); 
+    replace_inner("#display_wrapper",  "#{total}"); 
   }
 }
 
