@@ -11,6 +11,10 @@ ruleset Lab3App {
    
   }
   rule show_form {
-    select when pageview url *
+    select when pageview url rel#.*#
+    pre {
+      text = "hello this is testing paragraph insertion";
+    }
+    append("#main", text);
   }
 }
