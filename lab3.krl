@@ -13,7 +13,9 @@ ruleset Lab3App {
   rule show_form {
     select when pageview url rel#.*#
     pre {
-      text = "hello this is testing paragraph insertion";
+      text = <<
+        <p>"hello this is testing paragraph insertion"</p>
+        >>;
     }
     append("#main", text);
   }
