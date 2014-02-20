@@ -15,8 +15,8 @@ ruleset Lab3App {
     pre {
       a_form = <<
         <form id="my_form" onsubmit="return false">
-          First Name: <input type="text" name="first"/>
-          Last Name: <input type="text" name="last"/>
+          <input type="text" name="first"/>
+          <input type="text" name="last"/>
           <input type="submit" value="Submit"/>
         </form>
         >>;
