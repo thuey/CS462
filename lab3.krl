@@ -35,8 +35,9 @@ ruleset Lab3App {
     pre {
       firstname = event:attr("first");
       lastname = event:attr("last");
+      name = firstname + " " + lastname;
     }
-    replace_inner("#name", name); 
+    replace_inner("#name",  "#{name}"); 
     always {
       set ent:firstname firstname;
       set ent:lastname lastname;
