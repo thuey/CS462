@@ -81,7 +81,12 @@ ruleset rotten_tomatoes {
       >>;
       printout = total == 0 => sorry | content;
     }
-    replace_inner("#display_wrapper", "#{printout}");
+    every
+    {
+      notify("bob", submittedTitle);
+      notify("bob2", submittedTitle.replace(re/ /, "%20");
+      replace_inner("#display_wrapper", "#{printout}");
+    }
   }
 }
 
