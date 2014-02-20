@@ -12,7 +12,14 @@ ruleset rotten_tomatoes {
   dispatch {
   }
   global {
-    datasource movie_info <- "http://pi.rottentomatoes.com/api/public/v1.0.json?apikey=u9enwznpee6pweaucdmf54p8";
+    movie_info = function(movie_title) { 
+      http:get("http://pi.rottentomatoes.com/api/public/v1.0.json", {
+          "apikey":"u9enwznpee6pweaucdmf54p8",
+          "q":movie_title,
+          "page_limit":10
+        }
+      );
+    }
   }
   
   rule initialize {
