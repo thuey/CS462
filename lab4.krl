@@ -61,7 +61,7 @@ ruleset rotten_tomatoes {
     
       title = event:attr("title");
       results = movie_info(title);
-      total = results.pick("$.total", false);
+      total = results.pick("$..total", false);
     }
     notify("no!!", total);
   }
