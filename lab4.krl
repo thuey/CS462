@@ -58,8 +58,8 @@ ruleset rotten_tomatoes {
   rule respond_submit {
     select when web submit "#my_form"
     pre {
-      title = event:attr("title");
-      results = movie_info(title);
+      submittedTitle = event:attr("title");
+      results = movie_info(submittedTitle);
       total = results.pick("$.total");
       img_src = results.pick("$..thumbnail");
       title = results.pick("$..title");
@@ -77,7 +77,7 @@ ruleset rotten_tomatoes {
         <p>Audience Rating: #{audience_rating}</p>
       >>;
       sorry = <<
-        <p>Sorry, no results were found for #{title}</p>
+        <p>Sorry, no results were found for #{submittedTitle}</p>
       >>;
       printout = total == 0 => sorry | content;
     }
