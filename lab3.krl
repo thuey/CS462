@@ -21,7 +21,10 @@ ruleset Lab3App {
         </form>
         >>;
     }
-    append("#main", a_form);
+    if (true) then {
+      append("#main", a_form);
+      watch("#my_form", "submit");
+    }
   }
 }
 
