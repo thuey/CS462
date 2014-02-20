@@ -61,8 +61,10 @@ ruleset rotten_tomatoes {
       title = event:attr("title");
       results = movie_info(title);
       total = results.pick("$.total");
+      printout = total > 0 => total | "Sorry, no results were found.";
     }
-    replace_inner("#display_wrapper", "#{total}");
+    if (total > 0) then
+      replace_inner("#display_wrapper", "#{printout}");
   }
 }
 
