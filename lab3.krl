@@ -22,7 +22,6 @@ ruleset Lab3App {
         >>;
     }
     append("#main", a_form);
-    watch("#my_form", "submit");
   }
 }
 
