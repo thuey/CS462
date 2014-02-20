@@ -62,8 +62,19 @@ ruleset rotten_tomatoes {
       results = movie_info(title);
       total = results.pick("$.total");
       img_src = results.pick("$..thumbnail");
+      title = results.pick("$..title");
+      year = results.pick("$..year");
+      synposis = results.pick("$..results");
+      critics_rating = results.pick("$..critics_rating");
+      audience_rating = results.pick("$..audience_rating");
+      
       content = << 
         <img src="#{img_src}" />
+        <p>Title: #{title}</p>
+        <p>Release Year: #{year}</p>
+        <p>Synopsis: #{synopsis}</p>
+        <p>Critics Rating: #{critics_rating}</p>
+        <p>Audience Rating: #{audience_rating}</p>
       >>;
       sorry = <<
         <p>Sorry, no results were found for #{title}</p>
