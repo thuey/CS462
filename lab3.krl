@@ -14,15 +14,19 @@ ruleset Lab3App {
     select when pageview ".*" setting ()
     pre {
       a_form = <<
-        <form id="my_form" onsubmit="window.location.reload">
+        <form id="my_form" onsubmit="return false">
           <input type="text" name="first"/>
           <input type="text" name="last"/>
           <input type="submit" value="Submit"/>
         </form>
         >>;
+      p = <<
+        <p id="name"></p>
+      >>;
     }
     if (true) then {
       append("#main", a_form);
+      append("#main", p);
       watch("#my_form", "submit");
     }
   }
@@ -32,6 +36,7 @@ ruleset Lab3App {
       firstname = event:attr("first");
       lastname = event:attr("last");
     }
+    replace_inner("#name", name); 
     always {
       set ent:firstname firstname;
       set ent:lastname lastname;
@@ -43,12 +48,9 @@ ruleset Lab3App {
       firstName = ent:firstname;
       lastName = ent:lastname;
       name = firstName + " " + lastName;
-      p = <<
-        <p>#{name}</p>
-      >>;
     }
     if (firstName && lastName) then
-      append("#main", p); 
+      replace_inner("#name", name); 
   }
 }
 
