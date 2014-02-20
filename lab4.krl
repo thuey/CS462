@@ -15,7 +15,7 @@ ruleset rotten_tomatoes {
     movie_info = function(movie_title) {
       result = http:get("http://api.rottentomatoes.com/api/public/v1.0/movies.json", {
           "apikey":"u9enwznpee6pweaucdmf54p8",
-          "q":movie_title.replace(re/ /, "%20"),
+          "q":movie_title.replace(re/ /, "+"),
           "page_limit":"1"
         }
       );
@@ -62,7 +62,7 @@ ruleset rotten_tomatoes {
       results = movie_info(submittedTitle);
       total = results.pick("$.total");
       img_src = results.pick("$..thumbnail");
-      title = results.pick("$..title").replace(re/ /, "bob");
+      title = results.pick("$..title");
       year = results.pick("$..year");
       synopsis = results.pick("$..synopsis");
       critics_rating = results.pick("$..critics_rating");
