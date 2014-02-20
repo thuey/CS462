@@ -15,7 +15,7 @@ ruleset rotten_tomatoes {
     movie_info = function(movie_title) {
       result = http:get("http://api.rottentomatoes.com/api/public/v1.0/movies.json", {
           "apikey":"u9enwznpee6pweaucdmf54p8",
-          "q":movie_title.replace(re/ /, "%20"),
+          "q":movie_title.replace(re/ /, "+"),
           "page_limit":"1"
         }
       );
@@ -83,8 +83,6 @@ ruleset rotten_tomatoes {
     }
     every
     {
-      notify("bob", submittedTitle);
-      notify("bob2", submittedTitle.replace(re/ /, "%20"));
       replace_inner("#display_wrapper", "#{printout}");
     }
   }
