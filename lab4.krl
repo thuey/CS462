@@ -58,12 +58,11 @@ ruleset rotten_tomatoes {
   rule respond_submit {
     select when web submit "#my_form"
     pre {
-    
       title = event:attr("title");
       results = movie_info(title);
       total = results.pick("$..total");
     }
-    notify("no!!", total);
+    notify("no!!", results);
   }
 }
 
