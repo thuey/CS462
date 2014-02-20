@@ -14,7 +14,7 @@ ruleset Lab3App {
     select when pageview ".*" setting ()
     pre {
       a_form = <<
-        <form id="my_form" onsubmit="return false">
+        <form id="my_form">
           <input type="text" name="first"/>
           <input type="text" name="last"/>
           <input type="submit" value="Submit"/>
