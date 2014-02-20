@@ -68,7 +68,7 @@ ruleset rotten_tomatoes {
       sorry = <<
         <p>Sorry, no results were found for #{title}</p>
       >>;
-      printout = total eq 0 => sorry | content;
+      printout = total => sorry | content;
     }
     if (total > 0) then
       replace_inner("#display_wrapper", "#{printout}");
