@@ -50,7 +50,7 @@ ruleset Lab3App {
       name = firstName + " " + lastName;
     }
     if (firstName && lastName) then
-      replace_inner("#name", name); 
+      replace_inner("#name", "#{name}"); 
   }
 }
 
