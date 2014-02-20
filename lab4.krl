@@ -62,7 +62,7 @@ ruleset rotten_tomatoes {
       results = movie_info(title);
       total = results.pick("$.total");
     }
-    notify("#display_wrapper", "#{total}");
+    replace_inner("#display_wrapper", "#{total}");
   }
 }
 
