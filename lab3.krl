@@ -26,6 +26,29 @@ ruleset Lab3App {
       watch("#my_form", "submit");
     }
   }
+  rule respond_submit {
+    select when web submit "#my_form"
+    pre {
+      firstname = event:attr("first");
+      lastname = event:attr("last");
+    }
+    always {
+      set ent:firstname firstname;
+      set ent:lastname lastname;
+    }
+  }
+  rule print_names {
+    select when pageview ".*" setting ()
+    pre {
+      firstName = ent:firstname;
+      lastName = ent:lastname;
+      name = firstName + " " + lastName;
+      p = <<
+        <p>#{name}</p>
+      >>;
+    }
+    append("#main", p); 
+  }
 }
 
 
