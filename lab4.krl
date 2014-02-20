@@ -12,10 +12,23 @@ ruleset rotten_tomatoes {
   dispatch {
   }
   global {
-    movie_info = http:get("pi.rottentomatoes.com/api/public/v1.0.json",
-               {"apikey": "u9enwznpee6pweaucdmf54p8"
-               }
-              );
+    datasource movie_info <- "http://pi.rottentomatoes.com/api/public/v1.0.json?apikey=u9enwznpee6pweaucdmf54p8";
+  }
+  
+  rule initialize {
+    select when pageview ".*" setting ()
+    pre {
+      form_wrapper = <<
+        <div id="form_wrapper"></div>
+      >>;
+      display_wrapper = <<
+        <div id="display_wrapper"></div>
+      >>;
+    }
+    every {
+      append("#main", display_wrapper);
+      append("#main", form_wrapper);
+    }
   }
 
   rule show_form {
@@ -29,7 +42,7 @@ ruleset rotten_tomatoes {
         >>;
     }
     if (true) then {
-      append("#main", a_form);
+      replace_inner("#form_wrapper", a_form);
       watch("#my_form", "submit");
     }
   }
@@ -42,6 +55,7 @@ ruleset rotten_tomatoes {
     replace_inner("#name",  "#{name}"); 
   }
 }
+
 
 
 
