@@ -10,6 +10,24 @@ ruleset Lab3App {
   global {
    
   }
+  rule clear {
+    select when pageview ".*" setting()
+    pre {
+      stringParser = function(query) {
+          query.extract(re/(clear=1)/);
+        };
+      query = page:url("query");
+      matches = stringParser(query);
+      text = matches[0] || "";
+    }
+    if (text eq "clear=1") then {
+      noop();
+    }
+    fired {
+      clear ent:firstname;
+      clear ent:lastname;
+    }
+  }
   rule show_form {
     select when pageview ".*" setting ()
     pre {
