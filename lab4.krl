@@ -70,8 +70,7 @@ ruleset rotten_tomatoes {
       >>;
       printout = total == 0 => sorry | content;
     }
-    if (total > 0) then
-      replace_inner("#display_wrapper", "#{printout}");
+    replace_inner("#display_wrapper", "#{printout}");
   }
 }
 
