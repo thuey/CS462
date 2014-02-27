@@ -31,7 +31,7 @@ ruleset foursquare {
     pre {
       checkin = event:attr("checkin");
       checkinDecoded = checkin.decode();
-      venue = checkinDecoded.pick("$..venue").pick("$..name");
+      venue = checkinDecoded.pick("$..venue").pick("$.name");
       city = checkinDecoded.pick("$..venue").pick("$..city");
       shout = checkinDecoded.pick("$..shout");
       createdAt = checkinDecoded.pick("$..createdAt");
