@@ -43,7 +43,7 @@ ruleset foursquare {
   }
   
   rule display_checkin {
-    select when foursquare checkin
+    select when pageview ".*" setting ()
     pre {
       venue = ent:venue;
       city = ent:city;
