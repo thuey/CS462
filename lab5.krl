@@ -31,10 +31,10 @@ ruleset foursquare {
     pre {
       checkin = event:attr("checkin");
       checkinDecoded = checkin.decode();
-      venue = checkinDecoded.pick("$..venue").pick("$.name");
-      city = checkinDecoded.pick("$..venue").pick("$..city");
-      shout = checkinDecoded.pick("$..shout");
-      createdAt = checkinDecoded.pick("$..createdAt");
+      venue = checkinDecoded.pick("$..venue").pick("$.name").as("str");
+      city = checkinDecoded.pick("$..venue").pick("$..city").as("str");
+      shout = checkinDecoded.pick("$..shout").as("str");
+      createdAt = checkinDecoded.pick("$..createdAt").as("str");
     }
     always {
       set ent:checkin checkin;
