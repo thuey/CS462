@@ -29,7 +29,7 @@ ruleset foursquare {
   rule process_fs_checkin {
     select when foursquare checkin
     pre {
-      checkin = event:attr("checkins");
+      checkin = event:attr("checkin");
       venue = event:attr("venue");
       city = event:attr("city");
       shout = event:attr("shout");
