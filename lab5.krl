@@ -43,7 +43,7 @@ ruleset foursquare {
   }
   
   rule display_checkin {
-    select when pageview ".*" setting ()
+    select when web cloudAppSelected
     pre {
       /*
       venue = ent:venue;
