@@ -30,10 +30,11 @@ ruleset foursquare {
     select when foursquare checkin
     pre {
       checkin = event:attr("checkin");
-      venue = event:attr("venue");
-      city = event:attr("city");
-      shout = event:attr("shout");
-      createdAt = event:attr("createdAt");
+      checkinDecoded = checkin.decode();
+      venue = checkinDecoded.pick("$..venue").pick("$..name");
+      city = checkinDecoded.pick("$..venue").pick("$..city");
+      shout = checkinDecoded.pick("$..shout");
+      createdAt = checkinDecoded.pick("$..createdAt");
     }
     always {
       set ent:checkin checkin;
