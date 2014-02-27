@@ -55,7 +55,6 @@ ruleset foursquare {
       createdAt = ent:createdAt;
       
       content = << 
-        <p>Checkin: #{checkin}</p>
         <p>Venue: #{venue}</p>
         <p>City: #{city}</p>
         <p>Shout: #{shout}</p>
