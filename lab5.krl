@@ -45,10 +45,16 @@ ruleset foursquare {
   rule display_checkin {
     select when pageview ".*" setting ()
     pre {
+      /*
       venue = ent:venue;
       city = ent:city;
       shout = ent:shout;
       createdAt = ent:createdAt;
+      */
+      venue = "hello";
+      city = "world";
+      shout = "my";
+      createdAt = "name";
       
       content = << 
         <p>Venue: #{venue}</p>
