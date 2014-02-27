@@ -16,6 +16,22 @@ ruleset foursquare {
   }
   
   rule process_fs_checkin {
-    
+    select when foursquare checkin
+    pre {
+      venue = event:attr("venue");
+      city = event:attr("city");
+      shout = event:attr("shout");
+      createdAt = event:attr("createdAt");
+    }
+    always {
+      set ent:venue venue;
+      set ent:city city;
+      set ent:shout shout;
+      set ent:createdAt createdAt;
+    }
+  }
+  
+  rule display_checkin {
+    select when foursquare checkin
   }
 }
