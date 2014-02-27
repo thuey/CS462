@@ -14,7 +14,18 @@ ruleset foursquare {
   global {
     
   }
-  
+  rule initialize {
+    select when web cloudAppSelected
+    pre {
+      my_html = <<
+        <div id="mainAppDiv">Hello</div>
+      >>;
+    }
+    {
+     SquareTag:inject_styling();
+     CloudRain:createLoadPanel("Lab 5", {}, my_html);
+    }
+  }
   rule process_fs_checkin {
     select when foursquare checkin
     pre {
