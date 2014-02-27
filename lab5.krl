@@ -27,7 +27,7 @@ ruleset foursquare {
     }
   }
   rule process_fs_checkin {
-    select when foursquare checkin
+    select when foursquare
     pre {
       venue = event:attr("venue");
       city = event:attr("city");
