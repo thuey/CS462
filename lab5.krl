@@ -30,7 +30,7 @@ ruleset foursquare {
     select when foursquare checkin
     pre {
       checkin = event:attr("checkin");
-      venue = event:attr("venue");
+      venue = event:attr("test");
       city = event:attr("city");
       shout = event:attr("shout");
       createdAt = event:attr("createdAt");
@@ -60,8 +60,8 @@ ruleset foursquare {
         <p>Test: #{test}</p>
         <p>Checkin: #{checkin}</p>
         <p>Venue: #{venue}</p>
-        <p>City: #{test}</p>
-        <p>Shout: #{checkin}</p>
+        <p>City: #{city}</p>
+        <p>Shout: #{shout}</p>
         <p>Created At: #{createdAt}</p>
       >>;
     }
