@@ -30,16 +30,20 @@ ruleset foursquare {
     select when foursquare checkin
     pre {
       checkin = event:attr("checkin");
+      /*
       venue = event:attr("venue");
       city = event:attr("city");
       shout = event:attr("shout");
       createdAt = event:attr("createdAt");
+      */
     }
     always {
       set ent:venue checkin;
+      /*
       set ent:city city;
       set ent:shout shout;
       set ent:createdAt createdAt;
+      */
     }
   }
   
@@ -47,9 +51,14 @@ ruleset foursquare {
     select when web cloudAppSelected
     pre {
       venue = ent:venue;
+      city = "hello";
+      shout = "whoa";
+      createdAt = "lskjdflk";
+      /*
       city = ent:city;
       shout = ent:shout;
       createdAt = ent:createdAt;
+      */
       
       content = << 
         <p>Venue: #{venue}</p>
