@@ -60,8 +60,8 @@ ruleset foursquare {
         <p>Test: #{test}</p>
         <p>Checkin: #{checkin}</p>
         <p>Venue: #{venue}</p>
-        <p>City: #{city}</p>
-        <p>Shout: #{shout}</p>
+        <p>City: #{test}</p>
+        <p>Shout: #{checkin}</p>
         <p>Created At: #{createdAt}</p>
       >>;
     }
