@@ -1,4 +1,3 @@
-
 ruleset HelloWorldApp {
   meta {
     name "Hello World"
@@ -14,6 +13,19 @@ ruleset HelloWorldApp {
   }
   global {
   }
+  rule initialize {
+    select when web cloudAppSelected
+    pre {
+      my_html = <<
+        <h5>Hello, World!</h5>
+      >>;
+    }
+    {
+     SquareTag:inject_styling();
+     CloudRain:createLoadPanel("Hello World!", {}, my_html);
+    }
+  }
+  
   rule first_rule {
     select when pageview ".*" setting ()
     every {
