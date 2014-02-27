@@ -44,5 +44,19 @@ ruleset foursquare {
   
   rule display_checkin {
     select when foursquare checkin
+    pre {
+      venue = ent:venue;
+      city = ent:city;
+      shout = ent:shout;
+      createdAt = ent:createdAt;
+      
+      content = << 
+        <p>Venue: #{venue}</p>
+        <p>City: #{city}</p>
+        <p>Shout: #{shout}</p>
+        <p>Created At: #{createdAt}</p>
+      >>;
+    }
+    replace_inner("#mainAppDiv", "#{printout}");
   }
 }
