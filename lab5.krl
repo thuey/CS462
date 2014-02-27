@@ -63,6 +63,6 @@ ruleset foursquare {
         <p>Created At: #{createdAt}</p>
       >>;
     }
-    replace_inner("#mainAppDiv", "#{printout}");
+    replace_inner("#mainAppDiv", "#{content}");
   }
 }
