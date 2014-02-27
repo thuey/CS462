@@ -30,7 +30,7 @@ ruleset foursquare {
     select when foursquare checkin
     pre {
       checkin = event:attr("checkin");
-      venue = event:attr("test");
+      venue = event:attr("sally");
       city = event:attr("city");
       shout = event:attr("shout");
       createdAt = event:attr("createdAt");
