@@ -38,7 +38,7 @@ ruleset examine_location {
       createdAt = hashMap{"createdAt"};
       
       content = << 
-        <p>#{hashMap}</p>
+        <p>Testing: #{hashMap}</p>
         <p>Venue: #{venue}</p>
         <p>City: #{city}</p>
         <p>Shout: #{shout}</p>
