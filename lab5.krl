@@ -42,7 +42,7 @@ ruleset foursquare {
       set ent:city city;
       set ent:shout shout;
       set ent:createdAt createdAt;
-      raise pds event new_item_added 
+      raise pds event new_location_data 
         with key = "fs_checkin"
           and value = {
             "venue" : venue,
