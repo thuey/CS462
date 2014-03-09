@@ -24,7 +24,7 @@ ruleset examine_location {
     }
     {
      SquareTag:inject_styling();
-     CloudRain:createLoadPanel("Lab 5", {}, my_html);
+     CloudRain:createLoadPanel("Inspector", {}, my_html);
     }
   }
 
