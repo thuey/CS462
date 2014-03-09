@@ -1,19 +1,23 @@
-ruleset foursquare {
+ruleset location_data {
   meta {
-    name "Foursquare"
+    name "Lab 6"
     description <<
-      Foursquare
+      Lab 6
     >>
     author ""
     logging off
     use module a169x701 alias CloudRain
     use module a41x186  alias SquareTag
+    provides get_location_data
   }
   dispatch {
   }
   global {
-    
+    get_location_data = function (k) {
+      ent:hashMap{k};
+    };
   }
+  /*
   rule initialize {
     select when web cloudAppSelected
     pre {
@@ -23,44 +27,21 @@ ruleset foursquare {
     }
     {
      SquareTag:inject_styling();
-     CloudRain:createLoadPanel("Lab 5", {}, my_html);
+     CloudRain:createLoadPanel("Lab 6", {}, my_html);
     }
   }
-  rule process_fs_checkin {
-    select when foursquare checkin
+  */
+
+  rule add_location_item {
+    select when pds new_location_data
     pre {
-      checkin = event:attr("checkin");
-      checkinDecoded = checkin.decode();
-      venue = checkinDecoded.pick("$..venue").pick("$.name").as("str");
-      city = checkinDecoded.pick("$..venue").pick("$..city").as("str");
-      shout = checkinDecoded.pick("$..shout").as("str");
-      createdAt = checkinDecoded.pick("$..createdAt").as("str");
+      eventKey = event:attr("key");
+      eventValue = event:attr("value");
+      hashMap = {};
+      hashMap = hashMap.put([eventKey], eventValue);
     }
     always {
-      set ent:checkin checkin;
-      set ent:venue venue;
-      set ent:city city;
-      set ent:shout shout;
-      set ent:createdAt createdAt;
+      set ent:hashMap hashMap;
     }
-  }
-  
-  rule display_checkin {
-    select when web cloudAppSelected
-    pre {
-      checkin = ent:checkin;
-      venue = ent:venue;
-      city = ent:city;
-      shout = ent:shout;
-      createdAt = ent:createdAt;
-      
-      content = << 
-        <p>Venue: #{venue}</p>
-        <p>City: #{city}</p>
-        <p>Shout: #{shout}</p>
-        <p>Created At: #{createdAt}</p>
-      >>;
-    }
-    replace_inner("#mainAppDiv", "#{content}");
   }
 }
