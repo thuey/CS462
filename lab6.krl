@@ -17,28 +17,13 @@ ruleset location_data {
       ent:hashMap{k};
     };
   }
-  /*
-  rule initialize {
-    select when web cloudAppSelected
-    pre {
-      my_html = <<
-        <div id="mainAppDiv">Hello</div>
-      >>;
-    }
-    {
-     SquareTag:inject_styling();
-     CloudRain:createLoadPanel("Lab 6", {}, my_html);
-    }
-  }
-  */
 
   rule add_location_item {
     select when pds new_location_data
     pre {
       eventKey = event:attr("key");
       eventValue = event:attr("value");
-      hashMap = {};
-      hashMap = hashMap.put([eventKey], eventValue);
+      hashMap = {[eventKey] : eventValue};
     }
     always {
       set ent:hashMap hashMap;
