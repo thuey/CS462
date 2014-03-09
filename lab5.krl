@@ -43,12 +43,13 @@ ruleset foursquare {
       set ent:shout shout;
       set ent:createdAt createdAt;
       raise pds event new_item_added 
-        with fs_checkin = {
-          "venue" : venue,
-          "city"  : city,
-          "shout" : shout,
-          "createdAt" : createdAt
-        };
+        with key = "fs_checkin"
+          and value = {
+            "venue" : venue,
+            "city"  : city,
+            "shout" : shout,
+            "createdAt" : createdAt
+          };
     }
   }
   

@@ -1,4 +1,4 @@
-ruleset foursquare {
+ruleset examine_location {
   meta {
     name "Foursquare"
     description <<
@@ -8,6 +8,7 @@ ruleset foursquare {
     logging off
     use module a169x701 alias CloudRain
     use module a41x186  alias SquareTag
+    use module b505205x4 alias location_data
   }
   dispatch {
   }
@@ -26,40 +27,15 @@ ruleset foursquare {
      CloudRain:createLoadPanel("Lab 5", {}, my_html);
     }
   }
-  rule process_fs_checkin {
-    select when foursquare checkin
-    pre {
-      checkin = event:attr("checkin");
-      checkinDecoded = checkin.decode();
-      venue = checkinDecoded.pick("$..venue").pick("$.name").as("str");
-      city = checkinDecoded.pick("$..venue").pick("$..city").as("str");
-      shout = checkinDecoded.pick("$..shout").as("str");
-      createdAt = checkinDecoded.pick("$..createdAt").as("str");
-    }
-    always {
-      set ent:checkin checkin;
-      set ent:venue venue;
-      set ent:city city;
-      set ent:shout shout;
-      set ent:createdAt createdAt;
-      raise pds event new_item_added 
-        with fs_checkin = {
-          "venue" : venue,
-          "city"  : city,
-          "shout" : shout,
-          "createdAt" : createdAt
-        };
-    }
-  }
-  
-  rule display_checkin {
+
+  rule show_fs_location {
     select when web cloudAppSelected
     pre {
-      checkin = ent:checkin;
-      venue = ent:venue;
-      city = ent:city;
-      shout = ent:shout;
-      createdAt = ent:createdAt;
+      hashMap = location_data:get_location_data("fs_checkin");
+      venue = hashMap{"venue"};
+      city = hashMap{"city"};
+      shout = hashMap{"shout"};
+      createdAt = hashMap{"createdAt"};
       
       content = << 
         <p>Venue: #{venue}</p>
