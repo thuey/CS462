@@ -16,7 +16,7 @@ ruleset location_data {
     get_location_data = function (k) {
       ent:hashMap{[k]};
     };
-    global_message = "testing the message";
+    global_message = function () { ent:eventKey };
   }
 
   rule add_location_item {
@@ -28,6 +28,7 @@ ruleset location_data {
     }
     always {
       set ent:hashMap hashMap;
+      set ent:eventKey eventKey;
     }
   }
 }

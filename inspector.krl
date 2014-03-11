@@ -36,7 +36,7 @@ ruleset examine_location {
       city = hashMap{"city"};
       shout = hashMap{"shout"};
       createdAt = hashMap{"createdAt"};
-      message = location_data:global_message;
+      message = location_data:global_message();
       
       content = << 
         <p>Testing: #{message}</p>
