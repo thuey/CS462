@@ -7,13 +7,53 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "lab6.krl",
+			"settings":
+			{
+				"buffer_size": 590,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lab5.krl",
+			"settings":
+			{
+				"buffer_size": 1755,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "inspector.krl",
+			"settings":
+			{
+				"buffer_size": 1081,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 306.0,
 		"selected_items":
 		[
+			[
+				"Git: P",
+				"Git: Pull"
+			],
+			[
+				"Git",
+				"Git: Push"
+			],
+			[
+				"krl",
+				"Set Syntax: KRL (Kinetic Rule Language)"
+			],
+			[
+				"Git: Pull",
+				"Git: Pull"
+			],
 			[
 				"Install",
 				"Package Control: Install Package"
@@ -52,6 +92,7 @@
 	},
 	"file_history":
 	[
+		"/home/thuey/Documents/CS462/CS462/lab4.krl",
 		"/home/thuey/public_html/todo/package.json",
 		"/home/thuey/public_html/todo/server.js",
 		"/home/thuey/public_html/todo/public/core.js",
@@ -207,8 +248,93 @@
 	"groups":
 	[
 		{
+			"selected": 2,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "lab6.krl",
+					"settings":
+					{
+						"buffer_size": 590,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								527,
+								527
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/KRL (Kinetic Rule Language) Syntax/KRL.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "lab5.krl",
+					"settings":
+					{
+						"buffer_size": 1755,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1114,
+								1114
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/KRL (Kinetic Rule Language) Syntax/KRL.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 714.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "inspector.krl",
+					"settings":
+					{
+						"buffer_size": 1081,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								353,
+								353
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/KRL (Kinetic Rule Language) Syntax/KRL.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 255.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -243,6 +369,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.git":
+	{
+		"height": 112.0
+	},
 	"replace":
 	{
 		"height": 0.0
@@ -253,6 +383,22 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"ins",
+				"inspector.krl"
+			],
+			[
+				"lab4",
+				"lab4.krl"
+			],
+			[
+				"lab5",
+				"lab5.krl"
+			],
+			[
+				"lab6",
+				"lab6.krl"
+			],
 			[
 				"core.js",
 				"public/core.js"

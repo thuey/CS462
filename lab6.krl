@@ -14,7 +14,7 @@ ruleset location_data {
   }
   global {
     get_location_data = function (k) {
-      ent:hashMap{k};
+      ent:hashMap{[k]};
     };
   }
 
