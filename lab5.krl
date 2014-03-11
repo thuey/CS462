@@ -53,6 +53,11 @@ ruleset foursquare {
           };
     }
   }
+
+  rule test_pd {
+    select when pds new_location_data
+    send_directive("hello world") with test = "hello";
+  }
   
   rule display_checkin {
     select when web cloudAppSelected

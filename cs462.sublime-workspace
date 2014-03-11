@@ -11,7 +11,7 @@
 			"file": "lab6.krl",
 			"settings":
 			{
-				"buffer_size": 590,
+				"buffer_size": 730,
 				"line_ending": "Unix"
 			}
 		},
@@ -19,7 +19,7 @@
 			"file": "lab5.krl",
 			"settings":
 			{
-				"buffer_size": 1755,
+				"buffer_size": 1812,
 				"line_ending": "Unix"
 			}
 		},
@@ -27,7 +27,7 @@
 			"file": "inspector.krl",
 			"settings":
 			{
-				"buffer_size": 1081,
+				"buffer_size": 1129,
 				"line_ending": "Unix"
 			}
 		}
@@ -195,6 +195,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"hello",
 			"scotch",
 			"parser",
 			"body.parser",
@@ -248,7 +249,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -256,15 +257,15 @@
 					"file": "lab6.krl",
 					"settings":
 					{
-						"buffer_size": 590,
+						"buffer_size": 730,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								527,
-								527
+								427,
+								427
 							]
 						],
 						"settings":
@@ -284,15 +285,15 @@
 					"file": "lab5.krl",
 					"settings":
 					{
-						"buffer_size": 1755,
+						"buffer_size": 1812,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1114,
-								1114
+								1129,
+								1129
 							]
 						],
 						"settings":
@@ -302,7 +303,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 714.0,
+						"translation.y": 816.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -312,15 +313,15 @@
 					"file": "inspector.krl",
 					"settings":
 					{
-						"buffer_size": 1081,
+						"buffer_size": 1129,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								353,
-								353
+								1129,
+								1129
 							]
 						],
 						"settings":
@@ -330,7 +331,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 255.0,
+						"translation.y": 204.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
