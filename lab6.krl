@@ -28,7 +28,7 @@ ruleset location_data {
     }
     always {
       set ent:hashMap hashMap;
-      set ent:eventKey eventKey;
+      set ent:eventKey "jsldfkjasljdfk";
     }
   }
 }
