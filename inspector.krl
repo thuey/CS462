@@ -36,9 +36,10 @@ ruleset examine_location {
       city = hashMap{"city"};
       shout = hashMap{"shout"};
       createdAt = hashMap{"createdAt"};
+      message = location_data:global_message;
       
       content = << 
-        <p>Testing: #{hashMap}</p>
+        <p>Testing: #{message}</p>
         <p>Venue: #{venue}</p>
         <p>City: #{city}</p>
         <p>Shout: #{shout}</p>

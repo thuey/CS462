@@ -8,7 +8,7 @@ ruleset location_data {
     logging off
     use module a169x701 alias CloudRain
     use module a41x186  alias SquareTag
-    provides get_location_data
+    provides get_location_data, global_message
   }
   dispatch {
   }
@@ -16,6 +16,7 @@ ruleset location_data {
     get_location_data = function (k) {
       ent:hashMap{[k]};
     };
+    global_message = "testing the message";
   }
 
   rule add_location_item {
