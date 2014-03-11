@@ -36,6 +36,7 @@ ruleset foursquare {
       shout = checkinDecoded.pick("$..shout").as("str");
       createdAt = checkinDecoded.pick("$..createdAt").as("str");
     }
+    send_directive("venue name") with checkin = venue;
     always {
       set ent:checkin checkin;
       set ent:venue venue;

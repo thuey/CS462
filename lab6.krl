@@ -14,9 +14,9 @@ ruleset location_data {
   }
   global {
     get_location_data = function (k) {
-      ent:hashMap{[k]};
+      ent:hashMap{k};
     };
-    global_message = function () { ent:eventKey };
+    global_message = function () { ent:bob };
   }
 
   rule add_location_item {
@@ -24,11 +24,11 @@ ruleset location_data {
     pre {
       eventKey = event:attr("key");
       eventValue = event:attr("value");
-      hashMap = {[eventKey] : eventValue};
     }
+    send_directive(eventKey) with location = eventValue;
     always {
-      set ent:hashMap hashMap;
-      set ent:eventKey "jsldfkjasljdfk";
+      set ent:hashMap{event:attr("key")} event:attr("value");
+      set ent:bob "hello world";
     }
   }
 }
