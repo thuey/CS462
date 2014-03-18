@@ -35,6 +35,8 @@ ruleset foursquare {
       city = checkinDecoded.pick("$..venue").pick("$..city").as("str");
       shout = checkinDecoded.pick("$..shout").as("str");
       createdAt = checkinDecoded.pick("$..createdAt").as("str");
+      lat = checkinDecoded.pick("$..venue").pick("$..lat");
+      lng = checkinDecoded.pick("$..venue").pick("$..lng");
     }
     send_directive("venue name") with checkin = venue;
     always {
@@ -43,20 +45,19 @@ ruleset foursquare {
       set ent:city city;
       set ent:shout shout;
       set ent:createdAt createdAt;
+      set ent:lat lat;
+      set ent:lng lng;
       raise pds event 'new_location_data' 
         with key = "fs_checkin"
           and value = {
             "venue" : venue,
             "city"  : city,
             "shout" : shout,
-            "createdAt" : createdAt
+            "createdAt" : createdAt,
+            "lat" : lat,
+            "lng" : lng
           };
     }
-  }
-
-  rule test_pd {
-    select when pds new_location_data
-    send_directive("hello world") with test = "hello";
   }
   
   rule display_checkin {
