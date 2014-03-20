@@ -39,7 +39,7 @@ ruleset lab7 {
       dM = dE*0.621371;
     }
     if (dM > 5) then {
-      send_directive("testing") with distance = dM;
+      send_directive("testing") with distance = [lata, lnga, dM];
     }
     fired {
       raise explicit event "location_nearby"
