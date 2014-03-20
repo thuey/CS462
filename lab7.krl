@@ -5,7 +5,7 @@ ruleset lab7 {
       Lab 7
     >>
     author ""
-    //use module a169x676 alias pds
+    use module a169x676 alias pds
   }
   dispatch {
   }
