@@ -33,6 +33,7 @@ ruleset lab7 {
        
       // distance between two co-ordinates in kilometers
       dE = math:great_circle_distance(rlnga,r90 - rlata, rlngb,r90 - rlatb, rEk);
+      
       // distance in miles:
       dM = dE*0.621371;
     }
