@@ -5,18 +5,24 @@ ruleset lab7 {
       Lab 7
     >>
     author ""
-    use module a169x676 alias pds
+    //use module a169x676 alias pds
   }
   dispatch {
   }
   global {
     
   }
+
+  rule nearby {
+    select when location currents
+    send_directive("testing") with test = "hello";
+  }
+
+  /*
   rule nearby {
     select when location currents
     
     pre {
-      /*
       lat = event:attr("lat");
       lng = event:attr("lng");
       locationData = pds:get_item("fs_checkin");
@@ -37,11 +43,9 @@ ruleset lab7 {
       
       // distance in miles:
       dM = dE*0.621371;
-      */
-      dM = 0;
     }
     send_directive("testing") with test = "hello";
-    //if (dM < 5) then
+    if (dM < 5) then
       noop();
     fired {
       raise explicit event "location_nearby"
@@ -52,4 +56,5 @@ ruleset lab7 {
         with distance = dM;
     }
   }
+  */
 }
