@@ -17,11 +17,11 @@ ruleset lab7 {
     select when location currents
     
     pre {
-      lat = event:attr("lat");
-      lng = event:attr("lng");
+      lata = event:attr("lat");
+      lnga = event:attr("lng");
       hashMap = location_data:get_location_data("fs_checkin");
-      pdsLat = hashMap{"lat"};
-      pdsLng = hashMap{"lng"};
+      latb = hashMap{"lat"};
+      lngb = hashMap{"lng"};
 
       r90   = math:pi()/2;      
       rEk   = 6378;         // radius of the Earth in km
