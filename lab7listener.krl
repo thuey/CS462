@@ -20,7 +20,7 @@ ruleset lab7listener {
   rule listener {
     select when explicit location_nearby
     pre {
-      value = event:attr("distance") | "0";
+      value = event:attr("distance").as("num") || "0";
     }
     if (true) then {
       send_directive("hello") with lala = "testing";
