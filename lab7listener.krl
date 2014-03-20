@@ -24,7 +24,7 @@ ruleset lab7listener {
     }
     if (true) then {
       send_directive("hello") with lala = "testing";
-      twilio:send_sms("8017094212", "3852194414", event:attr("distance"));
+      twilio:send_sms("8017094212", "3852194414", event:attr("distance").as("str"));
     }
   }
 }
