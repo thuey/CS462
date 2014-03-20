@@ -18,9 +18,7 @@ ruleset lab7 {
     pre {
     }
     send_directive("testing") with test = "bob";
-    if (1 < 5) then {
-      noop();
-    }
+
   }
 
   /*
