@@ -18,7 +18,7 @@ ruleset lab7listener {
     
   }
   rule listener {
-    select when location_nearby
+    select when web location_nearby
     pre {
 
     }
