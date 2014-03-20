@@ -20,11 +20,11 @@ ruleset lab7listener {
   rule listener {
     select when explicit location_nearby
     pre {
-
+      value = event:attr("distance") || "0";
     }
     if (true) then {
       send_directive("hello") with lala = "testing";
-      twilio:send_sms("8017094212", "3852194414", event:attr("distance").as("str"));
+      twilio:send_sms("8017094212", "3852194414", value);
     }
   }
 }
