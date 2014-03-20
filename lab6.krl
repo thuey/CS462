@@ -22,7 +22,7 @@ ruleset location_data {
   rule add_location_item {
     select when pds new_location_data
     pre {
-      eventKey = event:attr("key");
+      eventKey = event:attr("keyvalue");
       eventValue = event:attr("value");
     }
     send_directive(eventKey) with location = eventValue;

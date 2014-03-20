@@ -19,7 +19,7 @@ ruleset lab7 {
     pre {
       lat = event:attr("lat");
       lng = event:attr("lng");
-      locationData = pds:get_all_me();
+      locationData = pds:get_item("fs_checkin", "fs_checkin");
       pdsLat = locationData{"lat"};
       pdsLng = locationData{"lng"};
 

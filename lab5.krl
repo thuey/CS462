@@ -48,7 +48,8 @@ ruleset foursquare {
       set ent:lat lat;
       set ent:lng lng;
       raise pds event 'new_location_data' 
-        with key = "fs_checkin"
+        with namespace = "fs_checkin" 
+          and keyvalue = "fs_checkin"
           and value = {
             "venue" : venue,
             "city"  : city,
