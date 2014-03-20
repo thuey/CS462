@@ -38,7 +38,7 @@ ruleset lab7 {
       // distance in miles:
       dM = dE*0.621371;
     }
-    if (dM > 5) then {
+    if (dM < 5) then {
       send_directive("testing") with distance = [lata, lnga, dM];
     }
     fired {
