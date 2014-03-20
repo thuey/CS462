@@ -22,8 +22,7 @@ ruleset lab7listener {
     pre {
 
     }
-    if (true)
-    {
+    if (true) then {
       send_directive("hello") with lala = "testing";
       twilio:send_sms("8017094212", "3852194414", event:attr("distance"));
     }
