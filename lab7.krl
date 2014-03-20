@@ -38,11 +38,9 @@ ruleset lab7 {
       // distance in miles:
       dM = dE*0.621371;
     }
-    send_directive("testing") with test = [lat, lng, dM];
-    /*
-    if (dM < 5) then
+    if (dM > 5) then {
       noop();
-    */
+    }
     fired {
       raise explicit event "location_nearby"
         with distance = dM;
