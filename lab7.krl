@@ -19,7 +19,7 @@ ruleset lab7 {
     pre {
       lat = event:attr("lat");
       lng = event:attr("lng");
-      locationData = pds:get_item("fs_checkin");
+      locationData = pds:get_all_me();
       pdsLat = locationData{"lat"};
       pdsLng = locationData{"lng"};
 
@@ -38,7 +38,7 @@ ruleset lab7 {
       // distance in miles:
       dM = dE*0.621371;
     }
-    send_directive("testing") with test = [lat, lng, fs_checkin];
+    send_directive("testing") with test = [lat, lng, locationData];
     /*
     if (dM < 5) then
       noop();
