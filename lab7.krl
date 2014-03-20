@@ -12,16 +12,7 @@ ruleset lab7 {
   global {
     
   }
-
-  rule nearby {
-    select when location currents
-    pre {
-    }
-    send_directive("testing") with test = "bob";
-
-  }
-
-  /*
+  
   rule nearby {
     select when location currents
     
@@ -48,8 +39,10 @@ ruleset lab7 {
       dM = dE*0.621371;
     }
     send_directive("testing") with test = "hello";
+    /*
     if (dM < 5) then
       noop();
+    */
     fired {
       raise explicit event "location_nearby"
         with distance = dM;
@@ -59,5 +52,4 @@ ruleset lab7 {
         with distance = dM;
     }
   }
-  */
 }
