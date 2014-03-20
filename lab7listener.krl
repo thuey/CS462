@@ -18,7 +18,7 @@ ruleset lab7listener {
     
   }
   rule listener {
-    select when location nearby
+    select when location_nearby
     twilio:send_sms("8017094212", "3852194414", event:attr("distance"));
   }
 }
