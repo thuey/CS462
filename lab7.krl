@@ -16,6 +16,11 @@ ruleset lab7 {
   rule nearby {
     select when location currents
     send_directive("testing") with test = "hello";
+    pre {
+      dM = 0;
+    }
+    if (dM < 5) then
+      noop();
   }
 
   /*
