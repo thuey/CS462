@@ -19,6 +19,13 @@ ruleset lab7listener {
   }
   rule listener {
     select when location_nearby
-    twilio:send_sms("8017094212", "3852194414", event:attr("distance"));
+    pre {
+
+    }
+    if (true)
+    {
+      send_directive("hello") with lala = "testing";
+      twilio:send_sms("8017094212", "3852194414", event:attr("distance"));
+    }
   }
 }
