@@ -5,7 +5,7 @@ ruleset lab7 {
       Lab 7
     >>
     author ""
-    use module a169x676 alias pds
+    use module b505205x4 alias location_data
   }
   dispatch {
   }
@@ -19,9 +19,9 @@ ruleset lab7 {
     pre {
       lat = event:attr("lat");
       lng = event:attr("lng");
-      locationData = pds:get_item("fs_checkin", "fs_checkin");
-      pdsLat = locationData{"lat"};
-      pdsLng = locationData{"lng"};
+      hashMap = location_data:get_location_data("fs_checkin");
+      pdsLat = hashMap{"lat"};
+      pdsLng = hashMap{"lng"};
 
       r90   = math:pi()/2;      
       rEk   = 6378;         // radius of the Earth in km
@@ -38,7 +38,7 @@ ruleset lab7 {
       // distance in miles:
       dM = dE*0.621371;
     }
-    send_directive("testing") with test = [lat, lng, locationData];
+    send_directive("testing") with test = [lat, lng, hashMap];
     /*
     if (dM < 5) then
       noop();
