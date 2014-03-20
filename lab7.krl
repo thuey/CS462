@@ -38,7 +38,7 @@ ruleset lab7 {
       // distance in miles:
       dM = dE*0.621371;
     }
-    send_directive("testing") with test = [lat, lng, pdsLat, pdsLng];
+    send_directive("testing") with test = [lat, lng, fs_checkin];
     /*
     if (dM < 5) then
       noop();
