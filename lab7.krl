@@ -38,7 +38,7 @@ ruleset lab7 {
       // distance in miles:
       dM = dE*0.621371;
     }
-    send_directive("testing") with test = "hello";
+    send_directive("testing") with test = dM;
     /*
     if (dM < 5) then
       noop();
