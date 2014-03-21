@@ -5,6 +5,8 @@ ruleset lab8 {
       Lab 8
     >>
     author ""
+    use module a169x701 alias CloudRain
+    use module a41x186  alias SquareTag
   }
   dispatch {
   }
