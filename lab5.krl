@@ -77,14 +77,17 @@ ruleset foursquare {
       shout = ent:shout;
       createdAt = ent:createdAt;
     }
-    event:send(subscription_map, "location", "notification")
-      with location_data = {
-        "checkin" : checkin,
-        "venue" : venue,
-        "city"  : city,
-        "shout" : shout,
-        "createdAt" : createdAt
-       }
+    every {
+      send_directive("testing") with bob = "hello";
+      event:send(subscription_map, "location", "notification")
+        with location_data = {
+          "checkin" : checkin,
+          "venue" : venue,
+          "city"  : city,
+          "shout" : shout,
+          "createdAt" : createdAt
+         }
+     }
   }
   
   rule display_checkin {
