@@ -18,7 +18,7 @@ ruleset lab8 {
     select when web cloudAppSelected
     pre {
       my_html = <<
-        <div id="mainAppDiv">Hello</div>
+        <div id="mainAppDiv">Hello2</div>
       >>;
     }
     {
@@ -43,7 +43,7 @@ ruleset lab8 {
       set ent:createdAt createdAt;
     }
   }
-  /*
+  
   rule location_show {
     select when web cloudAppSelected
     pre {
@@ -62,5 +62,5 @@ ruleset lab8 {
     }
     replace_inner("#mainAppDiv", "#{content}");
   }
-  */
+  
 }
