@@ -26,7 +26,7 @@ ruleset lab8 {
      CloudRain:createLoadPanel("Lab 8", {}, my_html);
     }
   }
-  
+  /*
   rule location_catch {
     select when location notification
     pre {
@@ -62,4 +62,5 @@ ruleset lab8 {
     }
     replace_inner("#mainAppDiv", "#{content}");
   }
+  */
 }
