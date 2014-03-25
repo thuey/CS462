@@ -26,7 +26,7 @@ ruleset lab8 {
      CloudRain:createLoadPanel("Lab 8", {}, my_html);
     }
   }
-  /*
+  
   rule location_catch {
     select when location notification
     pre {
@@ -43,7 +43,7 @@ ruleset lab8 {
       set ent:createdAt createdAt;
     }
   }
-  
+  /*
   rule location_show {
     select when web cloudAppSelected
     pre {
