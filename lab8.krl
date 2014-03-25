@@ -36,6 +36,7 @@ ruleset lab8 {
       shout = location_data{'shout'};
       createdAt = location_data{'createdAt'};
     }
+    send_directive("testing") with bob = "abcdefg";
     always {
       set ent:venue venue;
       set ent:city city;
