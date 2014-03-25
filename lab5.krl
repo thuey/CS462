@@ -86,7 +86,6 @@ ruleset foursquare {
     }
     every {
       send_directive("testing") with bob = {
-          "checkin" : checkin,
           "venue" : venue,
           "city"  : city,
           "shout" : shout,
@@ -94,7 +93,6 @@ ruleset foursquare {
          };
       event:send(subscription_map, "location", "notification")
         with location_data = {
-          "checkin" : checkin,
           "venue" : venue,
           "city"  : city,
           "shout" : shout,
