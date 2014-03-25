@@ -84,21 +84,13 @@ ruleset foursquare {
           "createdAt" : createdAt
          }
     }
-    every {
-      send_directive("testing") with bob = {
-          "venue" : venue,
-          "city"  : city,
-          "shout" : shout,
-          "createdAt" : createdAt
-         };
-      event:send(subscription_map, "location", "notification")
-        with location_data = {
-          "venue" : venue,
-          "city"  : city,
-          "shout" : shout,
-          "createdAt" : createdAt
-         }
-     }
+    event:send(subscription_map, "location", "notification")
+      with location_data = {
+        "venue" : venue,
+        "city"  : city,
+        "shout" : shout,
+        "createdAt" : createdAt
+       }
   }
   
   rule display_checkin {
