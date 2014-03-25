@@ -36,21 +36,22 @@ ruleset lab8 {
       createdAt = event:attr("createdAt");
     }
     always {
-      set ent:venue venue;
-      set ent:city city;
-      set ent:shout shout;
-      set ent:createdAt createdAt;
+      set ent:location_data {
+        "venue" : venue,
+        "city"  : city,
+        "shout" : shout,
+        "createdAt" : createdAt
+      }
     }
   }
   
   rule location_show {
     select when web cloudAppSelected
     pre {
-      checkin = ent:checkin;
-      venue = ent:venue;
-      city = ent:city;
-      shout = ent:shout;
-      createdAt = ent:createdAt;
+      venue = ent:location_data{"venue"};
+      city = ent:location_data{"city"};
+      shout = ent:location_data{"shout"};
+      createdAt = ent:location_data{"createdAt"};
       
       content = << 
         <p>Venue: #{venue}</p>
