@@ -37,7 +37,7 @@ ruleset lab8 {
       shout = location_data{'shout'};
       createdAt = location_data{'createdAt'};
       */
-      venue = "bob";
+      venue = event:attr('location_data');
       city = "world";
       shout = "meme";
       createdAt = "whoa";
