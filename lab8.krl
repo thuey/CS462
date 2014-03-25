@@ -38,11 +38,11 @@ ruleset lab8 {
       createdAt = location_data{'createdAt'};
       */
       venue = event:attr('location_data');
+      venue = "and me";
       city = "world";
       shout = "meme";
       createdAt = "whoa";
     }
-    send_directive("testing") with bob = "abcdefg";
     always {
       set ent:venue venue;
       set ent:city city;
