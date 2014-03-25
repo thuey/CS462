@@ -30,17 +30,10 @@ ruleset lab8 {
   rule location_catch {
     select when location notification
     pre {
-      /*
-      location_data = event:attr('location_data');
-      venue = location_data{'venue'};
-      city = location_data{'city'};
-      shout = location_data{'shout'};
-      createdAt = location_data{'createdAt'};
-      */
-      venue = "and me";
-      city = event:attr('hello');
-      shout = "meme";
-      createdAt = "whoa";
+      venue = event:attr("venue");
+      city = event:attr("city");
+      shout = event:attr("shout");
+      createdAt = event:attr("createdAt");
     }
     always {
       set ent:venue venue;
