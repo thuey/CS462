@@ -85,12 +85,15 @@ ruleset foursquare {
          }
     }
     event:send(subscription_map, "location", "notification")
+      with hello = "steve"
+    /*
       with location_data = {
         "venue" : venue,
         "city"  : city,
         "shout" : shout,
         "createdAt" : createdAt
        }
+     */
   }
   
   rule display_checkin {
