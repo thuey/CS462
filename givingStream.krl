@@ -24,9 +24,10 @@ ruleset givingStream {
       command = event:attr("command");
       body = event:attr("body");
       result = http:post(givingStreamUrl + "users");
+      content = result.pick("$.content").decode();
       userId = result.pick("$.id").as("str");
     }
-    send_directive("getuserId") with result = result;
+    send_directive("getuserId") with userId = userId;
     always {
       set ent:userId userId;
       raise explicit event command
