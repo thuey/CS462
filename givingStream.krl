@@ -43,7 +43,7 @@ ruleset givingStream {
       command = bodyArray[0].lc();
     }
     if (userId) then {
-      send_directive("receiveCommand") with body = body;
+      send_directive("receiveCommand") with "body" = body;
       noop();
     }
     fired {
