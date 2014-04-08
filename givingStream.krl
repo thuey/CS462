@@ -47,6 +47,7 @@ ruleset givingStream {
       noop();
     }
     fired {
+      clear ent:userId;
       raise explicit event command
         with body = body;
     }
