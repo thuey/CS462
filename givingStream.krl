@@ -43,7 +43,6 @@ ruleset givingStream {
       command = bodyArray[0].lc();
     }
     if (userId) then {
-      send_directive("command") with command = command;
       noop();
     }
     fired {
@@ -62,6 +61,7 @@ ruleset givingStream {
     pre {
       body = event:attr("body");
     }
+    send_directive("command") with body = body;
   }
 
   rule watch {
