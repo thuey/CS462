@@ -27,7 +27,6 @@ ruleset givingStream {
       content = result.pick("$.content").decode();
       userId = content.pick("$.id").as("str");
     }
-    send_directive("getuserId") with userId = userId;
     always {
       set ent:userId userId;
       raise explicit event command
@@ -44,7 +43,6 @@ ruleset givingStream {
       command = bodyArray[0].lc();
     }
     if (userId) then {
-      twilio:sms("Hello Monkey");
       noop();
     }
     fired {
@@ -61,8 +59,10 @@ ruleset givingStream {
   rule offer {
     select when explicit offer
     pre {
+      userId = ent:userId;
       body = event:attr("body");
     }
+    send_directive("getuserId") with userId = userId;
   }
 
   rule watch {
