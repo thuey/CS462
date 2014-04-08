@@ -38,12 +38,12 @@ ruleset givingStream {
     select when twilio command
     pre {
       userId = ent:userId;
-      body = event:attr("Body");
+      body = event:attr("body");
       bodyArray = body.split(re/ /);
       command = bodyArray[0].lc();
     }
     if (userId) then {
-      send_directive("receiveCommand") with "body" = body;
+      send_directive("receiveCommand") with body = body;
       noop();
     }
     fired {
