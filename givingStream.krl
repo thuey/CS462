@@ -25,7 +25,7 @@ ruleset givingStream {
       body = event:attr("body");
       result = http:post(givingStreamUrl + "users");
       content = result.pick("$.content").decode();
-      userId = result.pick("$.id").as("str");
+      userId = content.pick("$.id").as("str");
     }
     send_directive("getuserId") with userId = userId;
     always {
