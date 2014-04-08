@@ -44,7 +44,6 @@ ruleset givingStream {
       command = bodyArray[0].lc();
     }
     if (userId) then {
-      send_directive("receiveCommand") with body = body;
       twilio:send_sms("8017094212", "3852194414", body);
       noop();
     }
