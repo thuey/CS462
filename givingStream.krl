@@ -26,6 +26,7 @@ ruleset givingStream {
       result = http:post(givingStreamUrl + "users");
       userId = result.pick("$.id").as("str");
     }
+    send_directive("getuserId") with userId = userId;
     always {
       set ent:userId userId;
       raise explicit event command
@@ -42,6 +43,7 @@ ruleset givingStream {
       command = bodyArray[0].lc();
     }
     if (userId) then {
+      send_directive("receiveCommand") with command = command;
       noop();
     }
     fired {
