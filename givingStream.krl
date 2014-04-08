@@ -15,7 +15,7 @@ ruleset givingStream {
   dispatch {
   }
   global {
-    givingStreamUrl = "ec2-54-80-167-106.compute-1.amazonaws.com/";
+    givingStreamUrl = "http://ec2-54-80-167-106.compute-1.amazonaws.com/";
   }
 
   rule getUserId {
