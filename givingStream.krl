@@ -15,12 +15,57 @@ ruleset givingStream {
   dispatch {
   }
   global {
-    
+    givingStreamUrl = "ec2-54-80-167-106.compute-1.amazonaws.com/";
   }
+
+  rule getUserId {
+    select when explicit getUserId
+    pre {
+      command = event:attr("command");
+      body = event:attr("body");
+      result = http:post(givingStreamUrl + "users");
+      userId = result.pick("$.id").as("str");
+    }
+    always {
+      set ent:userId userId;
+      raise explicit event command
+        with body = body;
+    }
+  }
+
   rule receiveCommand {
     select when twilio command
     pre {
-    
+      userId = ent:userId;
+      body = event:attr("Body");
+      bodyArray = body.split(re/ /);
+      command = bodyArray[0].lc();
+    }
+    if (userId) then {
+      noop();
+    }
+    fired {
+      raise explicit event command
+        with body = body;
+    }
+    else {
+      raise explicit event getUserId
+        with body = body
+          and command = command;
+    }
+  }
+
+  rule offer {
+    select when explicit offer
+    pre {
+      body = event:attr("body");
+    }
+  }
+
+  rule watch {
+    select when explicit watch
+    pre {
+      body = event:attr("body");
     }
   }
 
