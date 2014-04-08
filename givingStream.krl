@@ -44,7 +44,7 @@ ruleset givingStream {
       command = bodyArray[0].lc();
     }
     if (userId) then {
-      twilio:sms(body)
+      twilio:sms("Hello Monkey");
       noop();
     }
     fired {
