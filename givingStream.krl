@@ -43,6 +43,7 @@ ruleset givingStream {
       command = bodyArray[0].lc();
     }
     if (userId) then {
+      send_directive("command") with command = command;
       noop();
     }
     fired {
@@ -59,10 +60,8 @@ ruleset givingStream {
   rule offer {
     select when explicit offer
     pre {
-      userId = ent:userId;
       body = event:attr("body");
     }
-    send_directive("getuserId") with userId = userId;
   }
 
   rule watch {
