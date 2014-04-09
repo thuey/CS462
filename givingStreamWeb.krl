@@ -5,7 +5,8 @@ ruleset givingStreamWeb {
       The web listener for GivingStream
     >>
     author ""
-    }
+    use module a169x701 alias CloudRain
+    use module a41x186  alias SquareTag
   }
   dispatch {
   }
@@ -14,6 +15,77 @@ ruleset givingStreamWeb {
     eventChannel = "931D8D36-BEC9-11E3-B492-8C2563A358EB";
     rids = "b505205x9";
     myZipcode = "84604";
+  }
+
+  rule initialize {
+    select when pageview ".*" setting ()
+    pre {
+      form_wrapper = <<
+        <div id="form_wrapper"></div>
+      >>;
+      display_wrapper = <<
+        <div id="display_wrapper"></div>
+      >>;
+    }
+    every {
+      append("#main", display_wrapper);
+      append("#main", form_wrapper);
+    }
+  }
+
+  rule show_form {
+    select when pageview ".*" setting ()
+    pre {
+      a_form = <<
+        <form id="my_form" onsubmit="return false">
+          <input type="text" name="command"/>
+          <input type="submit" value="Submit"/>
+        </form>
+        >>;
+    }
+    if (true) then {
+      replace_inner("#form_wrapper", a_form);
+      watch("#my_form", "submit");
+    }
+  }
+
+  rule show_alerts {
+    select when pageview ".*"
+    foreach ent:alerts setting (alert)
+    pre {
+      location = alert.pick("$.location");
+      tag = alert.pick("$.tag");
+      description = alert.pick("$.description");
+      imageURL = alert.pick("$.imageURL");
+      content = <<
+        <p>Location: #{location}</p>
+        <p>Tag: #{tag}</p>
+        <p>Description: #{description}</p>
+        <p>Image URL: #{imageURL}</p>
+      >>;
+    }
+    replace_inner("#display_wrapper", content);
+  }
+
+  rule respond_submit {
+    select when web submit "#my_form"
+    pre {
+      body = event:attr("command");
+      bodyArray = body.split(re/ /);
+      command = bodyArray[0].lc();
+    }
+    if (userId) then {
+      noop();
+    }
+    fired {
+      raise explicit event command
+        with body = body;
+    }
+    else {
+      raise explicit event getUserId
+        with body = body
+          and command = command;
+    }
   }
 
   rule getUserId {
@@ -29,28 +101,6 @@ ruleset givingStreamWeb {
       set ent:userId userId;
       raise explicit event command
         with body = body;
-    }
-  }
-
-  rule receiveCommand {
-    select when app command
-    pre {
-      userId = ent:userId;
-      body = event:attr("body");
-      bodyArray = body.split(re/ /);
-      command = bodyArray[0].lc();
-    }
-    if (userId) then {
-      noop();
-    }
-    fired {
-      raise explicit event command
-        with body = body;
-    }
-    else {
-      raise explicit event getUserId
-        with body = body
-          and command = command;
     }
   }
 
@@ -111,15 +161,25 @@ ruleset givingStreamWeb {
   rule watchTagAlert {
     select when givingStream watchTagAlert
     pre {
-      location = data.pick("$.location").as("str");
-      tag = data.pick("$.tag").as("str");
-      description = data.pick("$.tag").as("str");
-      imageURL = data.pick("$.imageURL").as("str");
+      location = event:attr("location").as("str");
+      tag = event:attr("tag").as("str");
+      description = event:attr("description").as("str");
+      imageURL = event:attr("imageURL").as("str");
+      alerts = ent:alerts || [];
+      newAlert = {
+        "location": location,
+        "tag": tag,
+        "description": description,
+        "imageURL": imageURL
+      };
+      newAlerts = alerts.append(newAlert);
     }
     if (location == myZipcode) then
     {
-
+      noop();
+    }
+    fired {
+      set ent:alerts newAlerts;
     }
   }
-  
 }
