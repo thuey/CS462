@@ -43,7 +43,7 @@ ruleset givingStreamWeb {
     }
     {
       replace_inner("#form_wrapper", a_form);
-      CloudRain:skyWatchSubmit("#my_form");
+      watch("#my_form", "submit");
     }
   }
 
