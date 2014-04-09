@@ -55,11 +55,13 @@ ruleset givingStreamWeb {
       tag = alert.pick("$.tag");
       description = alert.pick("$.description");
       imageURL = alert.pick("$.imageURL");
+      test = ent:test || "";
       content = <<
         <p>Location: #{location}</p>
         <p>Tag: #{tag}</p>
         <p>Description: #{description}</p>
         <p>Image URL: #{imageURL}</p>
+        <p>Test: #{test}</p>
       >>;
     }
     replace_inner("#display_wrapper", content);
@@ -76,10 +78,12 @@ ruleset givingStreamWeb {
       noop();
     }
     fired {
+      set ent:test "testing";
       raise explicit event command
         with body = body;
     }
     else {
+      set ent:test "hello";
       raise explicit event getUserId
         with body = body
           and command = command;
