@@ -66,7 +66,7 @@ ruleset givingStreamWeb {
     }
     replace_inner("#display_wrapper", content);
   }
-
+/*
   rule respond_submit {
     select when web submit "#my_form"
     pre {
@@ -87,6 +87,16 @@ ruleset givingStreamWeb {
       raise explicit event getUserId
         with body = body
           and command = command;
+    }
+  }
+*/
+  rule respond_submit {
+    select when web submit "#my_form"
+    pre {
+      
+    }
+    always {
+      set ent:test "hello";
     }
   }
 
