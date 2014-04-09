@@ -65,9 +65,6 @@ ruleset givingStreamWeb {
       >>;
     }
     replace_inner("#display_wrapper", content);
-    always {
-      set ent:test "thanks";
-    }
   }
 
   rule respond_submit {
@@ -81,12 +78,12 @@ ruleset givingStreamWeb {
       noop();
     }
     fired {
-      set ent:test "testing";
+      set ent:test body;
       raise explicit event command
         with body = body;
     }
     else {
-      set ent:test "hello";
+      set ent:test body;
       raise explicit event getUserId
         with body = body
           and command = command;
