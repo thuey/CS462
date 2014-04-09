@@ -1,50 +1,42 @@
-ruleset rotten_tomatoes {
+ruleset givingStreamWeb {
   meta {
-    name "Rotten Tomatoes"
+    name "GivingStreamWeb"
     description <<
-      Rotten Tomatoes
+      The web listener for GivingStream
     >>
     author ""
-    logging off
     use module a169x701 alias CloudRain
     use module a41x186  alias SquareTag
   }
   dispatch {
   }
   global {
-    movie_info = function(movie_title) {
-      result = http:get("http://api.rottentomatoes.com/api/public/v1.0/movies.json", {
-          "apikey":"u9enwznpee6pweaucdmf54p8",
-          "q":movie_title,
-          "page_limit":"1"
-        }
-      );
-      result.pick("$.content").decode()
-    }
+    givingStreamUrl = "http://ec2-54-80-167-106.compute-1.amazonaws.com/";
+    eventChannel = "931D8D36-BEC9-11E3-B492-8C2563A358EB";
+    rids = "b505205x9";
+    myZipcode = "84604";
   }
-  
+
   rule initialize {
-    select when pageview ".*" setting ()
+    select when web cloudAppSelected
     pre {
-      form_wrapper = <<
+      my_html = <<
         <div id="form_wrapper"></div>
-      >>;
-      display_wrapper = <<
         <div id="display_wrapper"></div>
       >>;
     }
     every {
-      append("#main", display_wrapper);
-      append("#main", form_wrapper);
+      SquareTag:inject_styling();
+      CloudRain:createLoadPanel("GivingStream", {}, my_html);
     }
   }
 
   rule show_form {
-    select when pageview ".*" setting ()
+    select when web cloudAppSelected
     pre {
       a_form = <<
         <form id="my_form" onsubmit="return false">
-          <input type="text" name="title"/>
+          <input type="text" name="command"/>
           <input type="submit" value="Submit"/>
         </form>
         >>;
@@ -54,50 +46,138 @@ ruleset rotten_tomatoes {
       watch("#my_form", "submit");
     }
   }
-  
+
+  rule show_alerts {
+    select when web cloudAppSelected
+    foreach ent:alerts setting (alert)
+    pre {
+      location = alert.pick("$.location");
+      tag = alert.pick("$.tag");
+      description = alert.pick("$.description");
+      imageURL = alert.pick("$.imageURL");
+      content = <<
+        <p>Location: #{location}</p>
+        <p>Tag: #{tag}</p>
+        <p>Description: #{description}</p>
+        <p>Image URL: #{imageURL}</p>
+      >>;
+    }
+    replace_inner("#display_wrapper", content);
+  }
+
   rule respond_submit {
     select when web submit "#my_form"
     pre {
-      submittedTitle = event:attr("title");
-      results = movie_info(submittedTitle);
-      total = results.pick("$.total");
-      img_src = results.pick("$..thumbnail");
-      title = results.pick("$..title");
-      year = results.pick("$..year");
-      synopsis = results.pick("$..synopsis");
-      critics_rating = results.pick("$..critics_rating");
-      audience_rating = results.pick("$..audience_rating");
-      
-      content = << 
-        <img src="#{img_src}" />
-        <p>Title: #{title}</p>
-        <p>Release Year: #{year}</p>
-        <p>Synopsis: #{synopsis}</p>
-        <p>Critics Rating: #{critics_rating}</p>
-        <p>Audience Rating: #{audience_rating}</p>
-      >>;
-      sorry = <<
-        <p>Sorry, no results were found for #{submittedTitle}</p>
-      >>;
-      printout = total == 0 => sorry | content;
+      body = event:attr("command");
+      bodyArray = body.split(re/ /);
+      command = bodyArray[0].lc();
     }
-    every
+    if (userId) then {
+      noop();
+    }
+    fired {
+      raise explicit event command
+        with body = body;
+    }
+    else {
+      raise explicit event getUserId
+        with body = body
+          and command = command;
+    }
+  }
+
+  rule getUserId {
+    select when explicit getUserId
+    pre {
+      command = event:attr("command");
+      body = event:attr("body");
+      result = http:post(givingStreamUrl + "users");
+      content = result.pick("$.content").decode();
+      userId = content.pick("$.id").as("str");
+    }
+    always {
+      set ent:userId userId;
+      raise explicit event command
+        with body = body;
+    }
+  }
+
+  rule offer {
+    select when explicit offer
+    pre {
+      body = event:attr("body");
+      tags = body.extract(re/ #(\w+) /);
+      zipcode = body.extract(re/ z(\d+) /);
+
+      description = body.replace(re/ #\w+ /, "");
+      description = description.replace(re/ z\d+ /, "");
+    }
+    http:post(givingStreamUrl + "offers")
+      with body = {
+        "location" : zipcode,
+        "tag" : tags,
+        "description" : description
+      } and
+      headers = {
+        "content-type": "application/json"
+      };
+  }
+  
+  rule watch {
+    select when explicit watch
+    pre {
+      body = event:attr("body");
+      tags = body.extract(re/ #(\w+) /);
+      webhook = "https://cs.kobj.net/sky/event/"+eventChannel+"?_domain=givingStream&_name=watchTagAlert&_rids="+rids;
+    }
+    http:post(givingStreamUrl + "users/" + userId + "/watchtags")
+      with body = {
+        "watchtags" : tags,
+        "webhook" : webhook
+      } and
+      headers = {
+        "content-type": "application/json"
+      };
+  }
+  
+  rule stop {
+    select when explicit stop
+    pre {
+      body = event:attr("body");
+      tags = body.extract(re/ #(\w+) /);
+      webhook = "https://cs.kobj.net/sky/event/"+eventChannel+"?_domain=givingStream&_name=watchTagAlert&_rids="+rids
+    }
+    http:delete(givingStreamUrl + "users/" + userId + "/watchtags")
+      with body = {
+        "watchtags" : tags
+      } and
+      headers = {
+        "content-type": "application/json"
+      };
+  }
+  
+  rule watchTagAlert {
+    select when givingStream watchTagAlert
+    pre {
+      location = event:attr("location").as("str");
+      tag = event:attr("tag").as("str");
+      description = event:attr("description").as("str");
+      imageURL = event:attr("imageURL").as("str");
+      alerts = ent:alerts || [];
+      newAlert = {
+        "location": location,
+        "tag": tag,
+        "description": description,
+        "imageURL": imageURL
+      };
+      newAlerts = alerts.append(newAlert);
+    }
+    if (location == myZipcode) then
     {
-      replace_inner("#display_wrapper", "#{printout}");
+      noop();
+    }
+    fired {
+      set ent:alerts newAlerts;
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
