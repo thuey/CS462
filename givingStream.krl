@@ -116,10 +116,10 @@ ruleset givingStream {
   rule watchTagAlert {
     select when givingStream watchTagAlert
     pre {
-      location = data.pick("$.location").as("str");
-      tag = data.pick("$.tag").as("str");
-      description = data.pick("$.tag").as("str");
-      imageURL = data.pick("$.imageURL").as("str");
+      location = event:attr("location").as("str");
+      tag = event:attr("tag").as("str");
+      description = event:attr("description").as("str");
+      imageURL = event:attr("imageURL").as("str");
     }
     if (location == myZipcode) then
     {
