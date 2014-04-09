@@ -41,7 +41,7 @@ ruleset givingStreamWeb {
         </form>
         >>;
     }
-    if (true) then {
+    {
       replace_inner("#form_wrapper", a_form);
       watch("#my_form", "submit");
     }
@@ -65,6 +65,9 @@ ruleset givingStreamWeb {
       >>;
     }
     replace_inner("#display_wrapper", content);
+    always {
+      set ent:test "thanks";
+    }
   }
 
   rule respond_submit {
