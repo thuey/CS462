@@ -135,7 +135,9 @@ ruleset givingStream {
       content = event:attr("offer");
       contentDecoded = content.decode();
       location = contentDecoded.pick("$.location").as("str");
-      tags = contentDecoded.pick("$.tags").join(", ");
+      //tags = contentDecoded.pick("$.tags").join(", ");
+      tags = contentDecoded.pick("$.tags");
+      tags = tags[0];
       description = contentDecoded.pick("$.description").as("str");
       imgURL = contentDecoded.pick("$.imgURL").as("str");
     }
@@ -143,8 +145,9 @@ ruleset givingStream {
     {
       //send_directive("testContent") with testing = "Tags: " + tags + ". Description: " + description + ". Image: " + imgURL;
       send_directive("testContent") with testing = tags;
-      twilio:send_sms("8017094212", "3852194414", "Tags: " + tags + ". Description: " + description + ". Image: " + imgURL);
+      twilio:send_sms("8017094212", "3852194414", "Tags: ");
       twilio:send_sms("8017094212", "3852194414", "Tags: " + tags);
+      twilio:send_sms("8017094212", "3852194414", "Tags: " + tags + ". Description: " + description + ". Image: " + imgURL);
     }
   }
 }
