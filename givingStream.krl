@@ -116,11 +116,14 @@ ruleset givingStream {
       tags = body.extract(re/ #(\w+)\s?/);
       submitBody = tags => {"watchtags" : tags} | {};
     }
-    http:delete(givingStreamUrl + "users/" + userId + "/watchtags")
-      with body = submitBody and
-      headers = {
-        "content-type": "application/json"
-      };
+    {
+      send_directive("stopped") with tags = tags;
+      http:delete(givingStreamUrl + "users/" + userId + "/watchtags")
+        with body = submitBody and
+        headers = {
+          "content-type": "application/json"
+        };
+    }
   }
 
   rule watchTagAlert {
