@@ -40,8 +40,8 @@ ruleset givingStream {
   rule receiveCommand {
     select when twilio command
     pre {
-      /*
       userId = ent:userId;
+      /*
       body = event:attr("body");
       bodyArray = body.split(re/ /);
       command = bodyArray[0].lc();
