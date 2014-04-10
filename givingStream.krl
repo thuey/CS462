@@ -127,8 +127,8 @@ ruleset givingStream {
   rule watchTagAlert {
     select when givingStream watchTagAlert
     pre {
-      /*
       content = event:attr("offer");
+      /*
       contentDecoded = content.decode();
       location = contentDecoded.pick("$.location").as("str");
       tag = contentDecoded.pick("$.tag").as("str");
@@ -138,7 +138,7 @@ ruleset givingStream {
     }
     //if (location == myZipcode) then
     {
-      send_directive("test") with testing = "test";
+      send_directive("testContent") with testing = content;
       //twilio:send_sms("8017094212", "3852194414", tag + " " + description + " " + imageURL);
     }
   }
