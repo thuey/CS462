@@ -87,6 +87,7 @@ ruleset givingStream {
   rule watch {
     select when explicit watch
     pre {
+      userId = ent:userId;
       body = event:attr("body");
       tags = body.extract(re/ #(\w+)\s?/);
       webhook = "https://cs.kobj.net/sky/event/"+eventChannel+"?_domain=givingStream&_name=watchTagAlert&_rids="+rids;
