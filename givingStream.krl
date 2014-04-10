@@ -46,8 +46,10 @@ ruleset givingStream {
       command = bodyArray[0].lc();
     }
     if (userId) then {
+      send_directive("called") with called = userId;
       noop();
     }
+    /*
     fired {
       raise explicit event command
         with body = body;
@@ -57,6 +59,7 @@ ruleset givingStream {
         with body = body
           and command = command;
     }
+    */
   }
 
   rule offer {
@@ -121,24 +124,16 @@ ruleset givingStream {
         "content-type": "application/json"
       };
   }
-  
+
   rule watchTagAlert {
     select when givingStream watchTagAlert
     pre {
-      params = event:attr("description");
-    }
-    send_directive("alert") with params = params;
-  }
-
-  /*
-  rule watchTagAlert {
-    select when givingStream watchTagAlert
-    pre {
-
-      location = event:attr("location").as("str");
-      tag = event:attr("tag").as("str");
-      description = event:attr("description").as("str");
-      imageURL = event:attr("imageURL").as("str");
+      content = event:attr("content");
+      contentDecoded = content.decode();
+      location = contentDecoded.pick("$.location").as("str");
+      tag = contentDecoded.pick("$.tag").as("str");
+      description = contentDecoded.pick("$.description").as("str");
+      imageURL = contentDecoded.pick("$.imageURL").as("str");
     }
     if (location == myZipcode) then
     {
@@ -146,5 +141,4 @@ ruleset givingStream {
       twilio:send_sms("8017094212", "3852194414", tag + " " + description + " " + imageURL);
     }
   }
-  */
 }
