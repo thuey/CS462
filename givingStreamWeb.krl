@@ -14,7 +14,7 @@ ruleset givingStreamWeb {
   }
 
   rule initialize {
-    select when pageview ".*"
+    select when web cloudAppSelected
     pre {
       my_html = <<
         <div id="form_wrapper"></div>
@@ -29,7 +29,7 @@ ruleset givingStreamWeb {
   }
 
   rule show_form {
-    select when pageview ".*"
+    select when web cloudAppSelected
     pre {
       a_form = <<
         <form id="my_form" onsubmit="location.reload()">
@@ -56,7 +56,7 @@ ruleset givingStreamWeb {
   }
 
   rule show_alerts {
-    select when pageview ".*"
+    select when web cloudAppSelected
     pre {
       test = ent:test || "";
       content = <<
