@@ -91,7 +91,7 @@ ruleset givingStream {
       userId = ent:userId;
       body = event:attr("body");
       tags = body.extract(re/ #(\w+)\s?/);
-      webhook = "https://cs.kobj.net/sky/event/"+eventChannel+"?_domain=givingStream&_name=watchTagAlert&_rids="+rids;
+      webhook = "http://cs.kobj.net/sky/event/"+eventChannel+"?_domain=givingStream&_name=watchTagAlert&_rids="+rids;
     }
     {
       send_directive("testing") with tags = tags and webhook = webhook and userId = userId;
