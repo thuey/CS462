@@ -122,7 +122,7 @@ ruleset givingStream {
     {
       send_directive("stopped") with submitBody = submitBody;
       http:delete(givingStreamUrl + "users/" + userId + "/watchtags")
-        with body = {} and
+        with body = submitBody and
         headers = {
           "content-type": "application/json"
         };
