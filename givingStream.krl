@@ -104,8 +104,8 @@ ruleset givingStream {
         headers = {
           "content-type": "application/json"
         };
-      }
-      */
+        */
+    }
   }
   
   rule stop {
