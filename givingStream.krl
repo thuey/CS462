@@ -94,6 +94,7 @@ ruleset givingStream {
       webhook = "http://cs.kobj.net/sky/event/"+eventChannel+"?_domain=givingStream&_name=watchTagAlert&_rids="+rids;
     }
     {
+      twilio:send_sms("8017094212", "3852194414", body);
       send_directive("testing") with tags = tags and webhook = webhook and userId = userId;
       http:post(givingStreamUrl + "users/" + userId + "/watchtags")
         with body = {
