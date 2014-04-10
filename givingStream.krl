@@ -130,13 +130,13 @@ ruleset givingStream {
       content = event:attr("offer");
       contentDecoded = content.decode();
       location = contentDecoded.pick("$.location").as("str");
-      tags = contentDecoded.pick("$.tags").as("str");
+      tags = contentDecoded.pick("$.tags").join(" ");
       description = contentDecoded.pick("$.description").as("str");
       imageURL = contentDecoded.pick("$.imageURL").as("str");
     }
     //if (location == myZipcode) then
     {
-      send_directive("testContent") with testing = tags + " " + description + " " + imageURL;
+      send_directive("testContent") with testing = "Tags: " + tags + ". Description: " + description + " Image: " + imageURL;
       //twilio:send_sms("8017094212", "3852194414", tag + " " + description + " " + imageURL);
     }
   }
