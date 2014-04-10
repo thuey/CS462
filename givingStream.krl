@@ -129,17 +129,19 @@ ruleset givingStream {
   rule watchTagAlert {
     select when givingStream watchTagAlert
     pre {
-      content = event:attr("content");
+      content = event:attr("offer");
+      /*
       contentDecoded = content.decode();
       location = contentDecoded.pick("$.location").as("str");
       tag = contentDecoded.pick("$.tag").as("str");
       description = contentDecoded.pick("$.description").as("str");
       imageURL = contentDecoded.pick("$.imageURL").as("str");
+      */
     }
-    if (location == myZipcode) then
+    //if (location == myZipcode) then
     {
-      send_directive("alert") with location = location and tag = tag and description = description;
-      twilio:send_sms("8017094212", "3852194414", tag + " " + description + " " + imageURL);
+      send_directive("alert") with content = content;
+      //twilio:send_sms("8017094212", "3852194414", tag + " " + description + " " + imageURL);
     }
   }
 }
