@@ -69,15 +69,18 @@ ruleset givingStream {
       description = body.replace(re/ #\w+ /, "");
       description = description.replace(re/ z\d+ /, "");
     }
-    http:post(givingStreamUrl + "offers")
-      with body = {
-        "location" : zipcode,
-        "tag" : tags,
-        "description" : description
-      } and
-      headers = {
-        "content-type": "application/json"
-      };
+    {
+      send_directive("test") with hello = "not";
+      http:post(givingStreamUrl + "offers")
+        with body = {
+          "location" : zipcode,
+          "tag" : tags,
+          "description" : description
+        } and
+        headers = {
+          "content-type": "application/json"
+        };
+    }
   }
   
   rule watch {
