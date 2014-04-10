@@ -62,6 +62,7 @@ ruleset givingStream {
   rule offer {
     select when explicit offer
     pre {
+      userId = ent:userId;
       body = event:attr("body");
       tags = body.extract(re/ #(\w+) /);
       zipcode = body.extract(re/ z(\d+) /);
