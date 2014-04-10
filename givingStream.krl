@@ -65,8 +65,8 @@ ruleset givingStream {
     pre {
       userId = ent:userId;
       body = event:attr("body");
-      tags = body.extract(re/ #(\w+)\s?/);
-      tags = tags[0];
+      tag = body.extract(re/ #(\w+)\s?/);
+      tag = tag[0];
       zipcode = body.extract(re/ z(\d+)\s?/);
       zipcode = zipcode[0];
 
@@ -74,13 +74,13 @@ ruleset givingStream {
       description = description.replace(re/z\d+\s?/, "");
     }
     {
-      send_directive("test") with hello = "1." + body + "2." + tags + "3."+zipcode + "4."+description;
+      send_directive("test") with hello = "1." + body + "2." + tag + "3."+zipcode + "4."+description;
       http:post(givingStreamUrl + "offers")
         with body = {
           "location" : zipcode,
-          "tag" : tags,
+          "tag" : tag,
           "description" : description,
-          "imageURL" : ""
+          "imgURL" : ""
         } and
         headers = {
           "content-type": "application/json"
