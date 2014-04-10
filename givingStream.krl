@@ -114,12 +114,10 @@ ruleset givingStream {
       userId = ent:userId;
       body = event:attr("body");
       tags = body.extract(re/ #(\w+)\s?/);
-      webhook = "https://cs.kobj.net/sky/event/"+eventChannel+"?_domain=givingStream&_name=watchTagAlert&_rids="+rids
+      submitBody = tags => {"watchtags" : tags} | {};
     }
     http:delete(givingStreamUrl + "users/" + userId + "/watchtags")
-      with body = {
-        "watchtags" : tags
-      } and
+      with body = submitBody and
       headers = {
         "content-type": "application/json"
       };
