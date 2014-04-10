@@ -137,7 +137,7 @@ ruleset givingStream {
       location = contentDecoded.pick("$.location").as("str");
       tags = contentDecoded.pick("$.tags").join(", ");
       description = contentDecoded.pick("$.description").as("str");
-      imageURL = contentDecoded.pick("$.imageURL").as("str");
+      imgURL = contentDecoded.pick("$.imgURL").as("str");
     }
     if (location == myZipcode) then
     {
