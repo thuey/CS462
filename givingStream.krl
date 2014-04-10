@@ -142,7 +142,7 @@ ruleset givingStream {
     }
     //if (location == myZipcode) then
     {
-      send_directive("alert") with content = location;
+      send_directive("alert") with content = contentDecoded;
       //twilio:send_sms("8017094212", "3852194414", tag + " " + description + " " + imageURL);
     }
   }
