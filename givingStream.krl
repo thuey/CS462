@@ -70,7 +70,7 @@ ruleset givingStream {
       description = description.replace(re/ z\d+ /, "");
     }
     {
-      send_directive("test") with hello = "not";
+      send_directive("test") with hello = userId;
       http:post(givingStreamUrl + "offers")
         with body = {
           "location" : zipcode,
