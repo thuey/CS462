@@ -136,10 +136,10 @@ ruleset givingStream {
       description = contentDecoded.pick("$.description").as("str");
       imageURL = contentDecoded.pick("$.imageURL").as("str");
     }
-    //if (location == myZipcode) then
+    if (location == myZipcode) then
     {
-      //send_directive("alert") with content = location + " " + myZipcode + " " + tag + " " + description + " " + imageURL;
-      twilio:send_sms("8017094212", "3852194414", tag + " " + description + " " + imageURL);
+      send_directive("alert") with content = location + " " + myZipcode + " " + tag + " " + description + " " + imageURL;
+      //twilio:send_sms("8017094212", "3852194414", tag + " " + description + " " + imageURL);
     }
   }
 }
