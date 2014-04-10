@@ -91,14 +91,17 @@ ruleset givingStream {
       tags = body.extract(re/ #(\w+) /);
       webhook = "https://cs.kobj.net/sky/event/"+eventChannel+"?_domain=givingStream&_name=watchTagAlert&_rids="+rids;
     }
-    http:post(givingStreamUrl + "users/" + userId + "/watchtags")
-      with body = {
-        "watchtags" : tags,
-        "webhook" : webhook
-      } and
-      headers = {
-        "content-type": "application/json"
-      };
+    {
+      send_directive("testing") with tags = tags;
+      http:post(givingStreamUrl + "users/" + userId + "/watchtags")
+        with body = {
+          "watchtags" : tags,
+          "webhook" : webhook
+        } and
+        headers = {
+          "content-type": "application/json"
+        };
+      }
   }
   
   rule stop {
