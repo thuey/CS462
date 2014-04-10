@@ -92,9 +92,10 @@ ruleset givingStream {
       body = event:attr("body");
       tags = body.extract(re/ #(\w+)\s?/);
       webhook = "http://cs.kobj.net/sky/event/"+eventChannel+"?_domain=givingStream&_name=watchTagAlert&_rids="+rids;
+      joined = tags.join(" ");
     }
     {
-      twilio:send_sms("8017094212", "3852194414", body);
+      twilio:send_sms("8017094212", "3852194414", joined + webhook);
       send_directive("testing") with tags = tags and webhook = webhook and userId = userId;
       http:post(givingStreamUrl + "users/" + userId + "/watchtags")
         with body = {
