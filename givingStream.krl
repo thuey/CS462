@@ -125,9 +125,9 @@ ruleset givingStream {
   rule watchTagAlert {
     select when givingStream watchTagAlert
     pre {
-      params = event:attrs().as("str");
+      params = event:attr("description");
     }
-      send_directive("alert") with params = params;
+    send_directive("alert") with params = params;
   }
 
   /*
