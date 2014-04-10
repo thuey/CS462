@@ -112,7 +112,7 @@ ruleset givingStream {
       userId = ent:userId;
       body = event:attr("body");
       tags = body.extract(re/ #(\w+)\s?/);
-      submitBody = tags => {"watchtags" : tags} | {};
+      submitBody = tags.length() > 0 => {"watchtags" : tags} | {};
     }
     {
       send_directive("stopped") with submitBody = submitBody;
