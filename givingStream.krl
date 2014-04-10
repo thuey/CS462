@@ -42,13 +42,14 @@ ruleset givingStream {
     pre {
       userId = ent:userId;
       body = event:attr("body");
+      attrs = event:attrs();
       /*
       bodyArray = body.split(re/ /);
       command = bodyArray[0].lc();
       */
     }
     if (userId) then {
-      twilio:send_sms("8017094212", "3852194414", body);
+      twilio:send_sms("8017094212", "3852194414", attrs);
       send_directive("called") with called = userId;
       noop();
     }
