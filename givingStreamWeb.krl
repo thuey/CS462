@@ -18,7 +18,7 @@ ruleset givingStreamWeb {
   }
 
   rule initialize {
-    select when web cloudAppSelected
+    select when pageview ".*"
     pre {
       my_html = <<
         <div id="form_wrapper"></div>
