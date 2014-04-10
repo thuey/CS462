@@ -66,6 +66,7 @@ ruleset givingStream {
       userId = ent:userId;
       body = event:attr("body");
       tags = body.extract(re/ #(\w+)\s?/);
+      tags = tags[0];
       zipcode = body.extract(re/ z(\d+)\s?/);
       zipcode = zipcode[0];
 
@@ -78,7 +79,8 @@ ruleset givingStream {
         with body = {
           "location" : zipcode,
           "tag" : tags,
-          "description" : description
+          "description" : description,
+          "imageURL" : ""
         } and
         headers = {
           "content-type": "application/json"
