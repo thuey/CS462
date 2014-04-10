@@ -136,7 +136,7 @@ ruleset givingStream {
     }
     //if (location == myZipcode) then
     {
-      send_directive("testContent") with testing = "Tags: " + tags + " Description: " + description + " Image: " + imageURL;
+      send_directive("testContent") with testing = "Tags: " + tags + ". Description: " + description + ". Image: " + imageURL;
       //twilio:send_sms("8017094212", "3852194414", tag + " " + description + " " + imageURL);
     }
   }
