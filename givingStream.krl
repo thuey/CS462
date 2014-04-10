@@ -42,10 +42,8 @@ ruleset givingStream {
     pre {
       userId = ent:userId;
       body = event:attr("Body");
-      /*
       bodyArray = body.split(re/ /);
       command = bodyArray[0].lc();
-      */
     }
     if (userId) then {
       twilio:send_sms("8017094212", "3852194414", body);
