@@ -22,7 +22,6 @@ ruleset givingStreamWeb {
       >>;
     }
     every {
-      append("#main", my_html);
       SquareTag:inject_styling();
       CloudRain:createLoadPanel("GivingStream", {}, my_html);
     }
