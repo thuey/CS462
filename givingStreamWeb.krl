@@ -57,7 +57,8 @@ ruleset givingStreamWeb {
   rule show_alerts {
     select when web cloudAppSelected
     pre {
-      test = ent:test || "";
+      test = ent:test;
+      test = "whoa";
       content = <<
         <p>Test: #{test}</p>
       >>;
