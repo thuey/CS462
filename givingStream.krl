@@ -64,11 +64,11 @@ ruleset givingStream {
     pre {
       userId = ent:userId;
       body = event:attr("body");
-      tags = body.extract(re/ #(\w+) /);
-      zipcode = body.extract(re/ z(\d+) /);
+      tags = body.extract(re/ #(\w+)\s?/);
+      zipcode = body.extract(re/ z(\d+)\s?/);
 
-      description = body.replace(re/ #\w+ /, "");
-      description = description.replace(re/ z\d+ /, "");
+      description = body.replace(re/ #\w+\s?/, "");
+      description = description.replace(re/ z\d+\s?/, "");
     }
     {
       send_directive("test") with hello = userId;
@@ -88,7 +88,7 @@ ruleset givingStream {
     select when explicit watch
     pre {
       body = event:attr("body");
-      tags = body.extract(re/ #(\w+) /);
+      tags = body.extract(re/ #(\w+)\s?/);
       webhook = "https://cs.kobj.net/sky/event/"+eventChannel+"?_domain=givingStream&_name=watchTagAlert&_rids="+rids;
     }
     {
@@ -108,7 +108,7 @@ ruleset givingStream {
     select when explicit stop
     pre {
       body = event:attr("body");
-      tags = body.extract(re/ #(\w+) /);
+      tags = body.extract(re/ #(\w+)\s?/);
       webhook = "https://cs.kobj.net/sky/event/"+eventChannel+"?_domain=givingStream&_name=watchTagAlert&_rids="+rids
     }
     http:delete(givingStreamUrl + "users/" + userId + "/watchtags")
