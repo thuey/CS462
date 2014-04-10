@@ -63,7 +63,6 @@ ruleset givingStream {
   rule offer {
     select when explicit offer
     pre {
-      /*
       userId = ent:userId;
       body = event:attr("body");
       tags = body.extract(re/ #(\w+)\s?/);
@@ -71,10 +70,9 @@ ruleset givingStream {
 
       description = body.replace(re/ #\w+\s?/, "");
       description = description.replace(re/ z\d+\s?/, "");
-      */
     }
     {
-      send_directive("test") with hello = "meme";
+      send_directive("test") with hello = body + tags + zipcode + description;
       http:post(givingStreamUrl + "offers")
         with body = {
           "location" : zipcode,
