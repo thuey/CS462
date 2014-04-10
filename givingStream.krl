@@ -49,7 +49,6 @@ ruleset givingStream {
       send_directive("called") with called = userId;
       noop();
     }
-    /*
     fired {
       raise explicit event command
         with body = body;
@@ -59,7 +58,6 @@ ruleset givingStream {
         with body = body
           and command = command;
     }
-    */
   }
 
   rule offer {
@@ -97,6 +95,7 @@ ruleset givingStream {
     }
     {
       send_directive("testing") with tags = tags and webhook = webhook and userId = userId;
+      /*
       http:post(givingStreamUrl + "users/" + userId + "/watchtags")
         with body = {
           "watchtags" : tags,
@@ -106,6 +105,7 @@ ruleset givingStream {
           "content-type": "application/json"
         };
       }
+      */
   }
   
   rule stop {
