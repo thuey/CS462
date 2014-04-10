@@ -112,19 +112,22 @@ ruleset givingStreamWeb {
     pre {
       userId = ent:userId;
       body = event:attr("body");
-      tags = body.extract(re/ #(\w+)\s?/);
+      tag = body.extract(re/ #(\w+)\s?/);
+      tag = tag[0];
       zipcode = body.extract(re/ z(\d+)\s?/);
+      zipcode = zipcode[0];
 
-      description = body.replace(re/ #\w+\s?/, "");
-      description = description.replace(re/ z\d+\s?/, "");
+      description = body.replace(re/#\w+\s?/, "");
+      description = description.replace(re/z\d+\s?/, "");
     }
     {
-      send_directive("test") with hello = userId;
+      send_directive("test") with hello = "1." + body + "2." + tag + "3."+zipcode + "4."+description;
       http:post(givingStreamUrl + "offers")
         with body = {
           "location" : zipcode,
-          "tag" : tags,
-          "description" : description
+          "tag" : tag,
+          "description" : description,
+          "imgURL" : ""
         } and
         headers = {
           "content-type": "application/json"
