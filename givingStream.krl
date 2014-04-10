@@ -125,6 +125,16 @@ ruleset givingStream {
   rule watchTagAlert {
     select when givingStream watchTagAlert
     pre {
+      params = event:attrs().as("str");
+    }
+      send_directive("alert") with params = params;
+  }
+
+  /*
+  rule watchTagAlert {
+    select when givingStream watchTagAlert
+    pre {
+
       location = event:attr("location").as("str");
       tag = event:attr("tag").as("str");
       description = event:attr("description").as("str");
@@ -136,5 +146,5 @@ ruleset givingStream {
       twilio:send_sms("8017094212", "3852194414", tag + " " + description + " " + imageURL);
     }
   }
-  
+  */
 }
