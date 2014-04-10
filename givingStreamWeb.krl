@@ -32,7 +32,7 @@ ruleset givingStreamWeb {
     select when pageview ".*"
     pre {
       a_form = <<
-        <form id="my_form" onsubmit="return false">
+        <form id="my_form" onsubmit="location.reload()">
           <input type="text" name="command"/>
           <input type="submit" value="Submit"/>
         </form>
