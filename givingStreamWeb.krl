@@ -12,8 +12,8 @@ ruleset givingStreamWeb {
   }
   global {
     givingStreamUrl = "http://ec2-54-80-167-106.compute-1.amazonaws.com/";
-    eventChannel = "931D8D36-BEC9-11E3-B492-8C2563A358EB";
-    rids = "b505205x9";
+    eventChannel = "D66829CC-BF9E-11E3-8EDB-3E15D43F553C";
+    rids = "b505205x10";
     myZipcode = "84604";
   }
 
