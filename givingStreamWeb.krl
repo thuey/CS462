@@ -11,10 +11,6 @@ ruleset givingStreamWeb {
   dispatch {
   }
   global {
-    givingStreamUrl = "http://ec2-54-80-167-106.compute-1.amazonaws.com/";
-    eventChannel = "931D8D36-BEC9-11E3-B492-8C2563A358EB";
-    rids = "b505205x9";
-    myZipcode = "84604";
   }
 
   rule initialize {
@@ -52,7 +48,8 @@ ruleset givingStreamWeb {
     pre {
       
     }
-    always {
+    noop();
+    fired {
       set ent:test "hello";
     }
   }
