@@ -22,6 +22,7 @@ ruleset givingStreamWeb {
       >>;
     }
     every {
+      append("#main", my_html);
       SquareTag:inject_styling();
       CloudRain:createLoadPanel("GivingStream", {}, my_html);
     }
@@ -57,8 +58,7 @@ ruleset givingStreamWeb {
   rule show_alerts {
     select when web cloudAppSelected
     pre {
-      test = ent:test;
-      test = "whoa";
+      test = ent:test || "";
       content = <<
         <p>Test: #{test}</p>
       >>;
