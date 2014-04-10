@@ -174,18 +174,18 @@ ruleset givingStreamWeb {
   rule watchTagAlert {
     select when givingStream watchTagAlert
     pre {
-      content = event:attr("offer");
+     content = event:attr("offer");
       contentDecoded = content.decode();
       location = contentDecoded.pick("$.location").as("str");
-      tag = contentDecoded.pick("$.tag").as("str");
+      tags = contentDecoded.pick("$.tags").join(", ");
       description = contentDecoded.pick("$.description").as("str");
-      imageURL = contentDecoded.pick("$.imageURL").as("str");
+      imgURL = contentDecoded.pick("$.imgURL").as("str");
       alerts = ent:alerts || [];
       newAlert = {
         "location": location,
         "tag": tag,
         "description": description,
-        "imageURL": imageURL
+        "imageURL": imgURL
       };
       newAlerts = alerts.append(newAlert);
     }
