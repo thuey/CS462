@@ -72,6 +72,7 @@ ruleset givingStreamWeb {
   rule respond_submit {
     select when web submit "#my_form"
     pre {
+      userId = ent:userId;
       body = event:attr("command");
       bodyArray = body.split(re/ /);
       command = bodyArray[0].lc();
@@ -80,12 +81,10 @@ ruleset givingStreamWeb {
       noop();
     }
     fired {
-      set ent:test body;
       raise explicit event command
         with body = body;
     }
     else {
-      set ent:test body;
       raise explicit event getUserId
         with body = body
           and command = command;
