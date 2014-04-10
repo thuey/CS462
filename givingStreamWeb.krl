@@ -51,7 +51,7 @@ ruleset givingStreamWeb {
     }
     noop();
     fired {
-      set ent:test "hello";
+      set ent:test "whoa";
     }
   }
 
