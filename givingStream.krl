@@ -42,7 +42,7 @@ ruleset givingStream {
     pre {
       userId = ent:userId;
       body = event:attr("body");
-      attrs = event:attrs().as("str");
+      attrs = event:attrs().encode();
       /*
       bodyArray = body.split(re/ /);
       command = bodyArray[0].lc();
