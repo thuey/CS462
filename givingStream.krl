@@ -139,9 +139,10 @@ ruleset givingStream {
       description = contentDecoded.pick("$.description").as("str");
       imgURL = contentDecoded.pick("$.imgURL").as("str");
     }
-    if (location == myZipcode) then
+    //if (location == myZipcode) then
     {
-      send_directive("testContent") with testing = "Tags: " + tags + ". Description: " + description + ". Image: " + imageURL;
+      //send_directive("testContent") with testing = "Tags: " + tags + ". Description: " + description + ". Image: " + imageURL;
+      send_directive("testContent") with testing = content;
       twilio:send_sms("8017094212", "3852194414", "Tags: " + tags + ". Description: " + description + ". Image: " + imageURL);
     }
   }
