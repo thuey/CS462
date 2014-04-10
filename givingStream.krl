@@ -135,7 +135,7 @@ ruleset givingStream {
       content = event:attr("offer");
       contentDecoded = content.decode();
       location = contentDecoded.pick("$.location").as("str");
-      tags = contentDecoded.pick("$.tags");
+      tags = contentDecoded.pick("$.tags").as("str");
       //tags = contentDecoded.pick("$.tags");
       //tags = tags[0];
       description = contentDecoded.pick("$.description").as("str");
