@@ -72,7 +72,7 @@ ruleset givingStream {
       description = description.replace(re/ z\d+\s?/, "");
     }
     {
-      send_directive("test") with hello = body + tags + zipcode + description;
+      send_directive("test") with hello = "1." + body + "2." + tags + "3."+zipcode + "4."description;
       http:post(givingStreamUrl + "offers")
         with body = {
           "location" : zipcode,
