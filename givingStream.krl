@@ -108,8 +108,8 @@ ruleset givingStream {
     }
   }
   
-  rule stop {
-    select when explicit stop
+  rule stopWatching {
+    select when explicit stopWatching
     pre {
       userId = ent:userId;
       body = event:attr("body");
