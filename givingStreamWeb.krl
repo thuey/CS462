@@ -57,7 +57,7 @@ ruleset givingStreamWeb {
       tag = alert.pick("$.tag");
       description = alert.pick("$.description");
       imageURL = alert.pick("$.imageURL");
-      test = ent:test || "";
+      test = ent:userId || "";
       content = <<
         <p>Location: #{location}</p>
         <p>Tag: #{tag}</p>
