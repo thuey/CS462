@@ -67,9 +67,10 @@ ruleset givingStream {
       body = event:attr("body");
       tags = body.extract(re/ #(\w+)\s?/);
       zipcode = body.extract(re/ z(\d+)\s?/);
+      zipcode = zipcode[0];
 
-      description = body.replace(re/ #\w+\s?/, "");
-      description = description.replace(re/ z\d+\s?/, "");
+      description = body.replace(re/#\w+\s?/, "");
+      description = description.replace(re/z\d+\s?/, "");
     }
     {
       send_directive("test") with hello = "1." + body + "2." + tags + "3."+zipcode + "4."+description;
