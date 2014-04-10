@@ -95,7 +95,6 @@ ruleset givingStream {
     }
     {
       send_directive("testing") with tags = tags and webhook = webhook and userId = userId;
-      /*
       http:post(givingStreamUrl + "users/" + userId + "/watchtags")
         with body = {
           "watchtags" : tags,
@@ -104,7 +103,6 @@ ruleset givingStream {
         headers = {
           "content-type": "application/json"
         };
-        */
     }
   }
   
@@ -117,7 +115,7 @@ ruleset givingStream {
       submitBody = tags => {"watchtags" : tags} | {};
     }
     {
-      send_directive("stopped") with tags = tags;
+      send_directive("stopped") with submitBody = submitBody;
       http:delete(givingStreamUrl + "users/" + userId + "/watchtags")
         with body = submitBody and
         headers = {
@@ -138,8 +136,7 @@ ruleset givingStream {
     }
     if (location == myZipcode) then
     {
-      send_directive("alert") with content = location + " " + myZipcode + " " + tag + " " + description + " " + imageURL;
-      //twilio:send_sms("8017094212", "3852194414", tag + " " + description + " " + imageURL);
+      twilio:send_sms("8017094212", "3852194414", tag + " " + description + " " + imageURL);
     }
   }
 }
