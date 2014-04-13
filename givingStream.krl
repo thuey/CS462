@@ -50,7 +50,7 @@ ruleset givingStream {
       noop();
     }
     fired {
-      raise explicit event "testing"
+      raise explicit event command
         with body = body;
     }
     else {
@@ -85,6 +85,17 @@ ruleset givingStream {
         headers = {
           "content-type": "application/json"
         };
+    }
+  }
+
+  rule hello {
+    select when test testing
+    pre {
+
+    }
+    send_directive("test") with testing = "hello";
+    always {
+      raise explicit event testing;
     }
   }
 
