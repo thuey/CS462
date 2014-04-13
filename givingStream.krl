@@ -87,6 +87,14 @@ ruleset givingStream {
         };
     }
   }
+
+  rule testing {
+    select when explicit testing
+    pre {
+
+    }
+    send_directive("testing") with testing = "testing";
+  }
   
   rule watch {
     select when explicit watch
