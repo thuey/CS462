@@ -98,7 +98,6 @@ ruleset givingStream {
       joined = tags.join(" ");
     }
     {
-      //twilio:send_sms("8017094212", "3852194414", joined + webhook);
       send_directive("testing") with tags = tags and webhook = webhook and userId = userId;
       http:post(givingStreamUrl + "users/" + userId + "/watchtags")
         with body = {
@@ -135,7 +134,6 @@ ruleset givingStream {
       content = event:attr("offer");
       contentDecoded = content.decode();
       location = contentDecoded.pick("$.location").as("str");
-      //tags = contentDecoded.pick("$.tags").as("str");
       tags = contentDecoded.pick("$.tags");
       tags = tags[0];
       description = contentDecoded.pick("$.description").as("str");
@@ -143,10 +141,8 @@ ruleset givingStream {
     }
     if (location == myZipcode) then
     {
-      //send_sms("8017094212", "3852194414", "Location: " + location);
-      //send_directive("testContent") with testing = "Tags: " + tags + ". Description: " + description + ". Image: " + imgURL;
       send_directive("testContent") with testing = tags;
-      twilio:send_sms("8017094212", "3852194414", "Tags: " + tags + ". Description: " + description + ". Image: " + imgURL);
+      //twilio:send_sms("8017094212", "3852194414", "Tags: " + tags + ". Description: " + description + ". Image: " + imgURL);
     }
   }
 }
