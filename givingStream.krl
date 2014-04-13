@@ -49,11 +49,11 @@ ruleset givingStream {
       send_directive("called") with called = userId;
       noop();
     }
+    /*
     fired {
       raise explicit event command
         with body = body;
     }
-    /*
     else {
       raise explicit event getUserId
         with body = body
