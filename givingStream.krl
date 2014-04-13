@@ -53,11 +53,13 @@ ruleset givingStream {
       raise explicit event command
         with body = body;
     }
+    /*
     else {
       raise explicit event getUserId
         with body = body
           and command = command;
     }
+    */
   }
 
   rule offer {
