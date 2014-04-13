@@ -49,9 +49,8 @@ ruleset givingStream {
       send_directive("called") with called = userId;
       noop();
     }
-    /*
     fired {
-      raise explicit event command
+      raise explicit event "testing"
         with body = body;
     }
     else {
@@ -59,7 +58,6 @@ ruleset givingStream {
         with body = body
           and command = command;
     }
-    */
   }
 
   rule offer {
