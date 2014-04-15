@@ -33,7 +33,7 @@ ruleset givingStreamWeb {
       */
     }
   }
-
+  /*
   rule show_form {
     select when pageview ".*"
     pre {
@@ -200,4 +200,5 @@ ruleset givingStreamWeb {
       set ent:alerts newAlerts;
     }
   }
+  */
 }
