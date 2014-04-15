@@ -17,10 +17,9 @@ ruleset givingStream {
   global {
     givingStreamUrl = "http://ec2-54-80-167-106.compute-1.amazonaws.com/";
     eventChannel = "931D8D36-BEC9-11E3-B492-8C2563A358EB";
-    rids = "b505205x9";
     myZipcode = "84604";
   }
-
+  
   rule getUserId {
     select when explicit getUserId
     pre {
@@ -59,7 +58,7 @@ ruleset givingStream {
           and command = command;
     }
   }
-
+  /*
   rule offer {
     select when explicit offer
     pre {
@@ -94,7 +93,7 @@ ruleset givingStream {
       userId = ent:userId;
       body = event:attr("body");
       tags = body.extract(re/ #(\w+)\s?/);
-      webhook = "http://cs.kobj.net/sky/event/"+eventChannel+"?_domain=givingStream&_name=watchTagAlert&_rids="+rids;
+      webhook = "http://cs.kobj.net/sky/event/"+eventChannel+"?_domain=givingStream&_name=watchTagAlert";
       joined = tags.join(" ");
     }
     {
@@ -116,15 +115,11 @@ ruleset givingStream {
       userId = ent:userId;
       body = event:attr("body");
       tags = body.extract(re/ #(\w+)\s?/);
-      submitBody = tags.length() > 0 => {"watchtags" : tags} | {};
+      tag = tags.length() > 0 => tags[0] | '';
     }
     {
       send_directive("stopped") with submitBody = submitBody;
-      http:delete(givingStreamUrl + "users/" + userId + "/watchtags")
-        with body = submitBody and
-        headers = {
-          "content-type": "application/json"
-        };
+      http:delete(givingStreamUrl + "users/" + userId + "/watchtags/" + tag);
     }
   }
 
@@ -141,8 +136,9 @@ ruleset givingStream {
     }
     if (location == myZipcode) then
     {
-      send_directive("testContent") with testing = tags;
-      //twilio:send_sms("8017094212", "3852194414", "Tags: " + tags + ". Description: " + description + ". Image: " + imgURL);
+      //send_directive("testContent") with testing = tags;
+      twilio:send_sms("8017094212", "3852194414", "Tags: " + tags + ". Description: " + description + ". Image: " + imgURL);
     }
   }
+  */
 }
