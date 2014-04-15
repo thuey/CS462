@@ -19,7 +19,7 @@ ruleset givingStream {
     eventChannel = "931D8D36-BEC9-11E3-B492-8C2563A358EB";
     myZipcode = "84604";
   }
-
+  
   rule getUserId {
     select when explicit getUserId
     pre {
@@ -58,7 +58,7 @@ ruleset givingStream {
           and command = command;
     }
   }
-
+  /*
   rule offer {
     select when explicit offer
     pre {
@@ -140,4 +140,5 @@ ruleset givingStream {
       twilio:send_sms("8017094212", "3852194414", "Tags: " + tags + ". Description: " + description + ". Image: " + imgURL);
     }
   }
+  */
 }
