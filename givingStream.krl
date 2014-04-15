@@ -58,7 +58,7 @@ ruleset givingStream {
           and command = command;
     }
   }
-  /*
+  
   rule offer {
     select when explicit offer
     pre {
@@ -140,5 +140,5 @@ ruleset givingStream {
       twilio:send_sms("8017094212", "3852194414", "Tags: " + tags + ". Description: " + description + ". Image: " + imgURL);
     }
   }
-  */
+  
 }
